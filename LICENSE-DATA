@@ -30,7 +30,7 @@ Corrections from listed organisations are welcome — see the README.
 
 ## Third-party data
 
-`data/benelux.geojson` is derived from Natural Earth (1:50m Admin 0 – Countries),
+`data/benelux.geojson` is derived from Natural Earth (1:10m Admin 0 – Countries),
 which is in the **public domain**: <https://www.naturalearthdata.com/about/terms-of-use/>
 Map tiles are served by CARTO from OpenStreetMap data (© OpenStreetMap
 contributors, ODbL) and are not redistributed by this repository.

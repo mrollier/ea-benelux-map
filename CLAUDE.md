@@ -59,9 +59,32 @@ Language: English only for v1 (NL/FR later).
 - The map is full width. `.map-frame` carries `position: relative; z-index: 0` to create a
   stacking context — Leaflet's controls are `z-index: 1000` in its own stylesheet and will
   paint over the sticky filter bar without it. Don't remove it.
-- Country outlines come from the bundled `data/benelux.geojson` (7 KB, Natural Earth
-  1:50m, rebuilt only if boundaries change). Never fetch boundaries from a CDN — the site
-  must work offline. The layer is `interactive: false` so it cannot swallow pin clicks.
+- Country outlines come from the bundled `data/benelux.geojson` (28 KB, Natural Earth
+  **1:10m**, 1636 vertices, rebuilt only if boundaries change). Never fetch boundaries
+  from a CDN — the site must work offline. The layer is `interactive: false` so it cannot
+  swallow pin clicks.
+
+## UI conventions (v0.7)
+- **`CAUSE_EXPLAIN` in `js/ui.js` is the single source of cause-area copy.** It feeds the
+  chip tooltips, the on-page cause key and the note at the top of each open remote group.
+  Adding a cause area to the data without adding a sentence here leaves it unexplained in
+  three places at once. `TIER_EXPLAIN` is the same idea for tiers and is display-layer
+  only — `meta.tier_definitions` in the JSON stays as it is.
+- **No native `title=` tooltips.** Everything explanatory uses `data-tip` and the shared
+  component in `js/tooltip.js` (450 ms delay, instant on keyboard focus, suppressed for
+  touch pointers, moved into an open `<dialog>` so the modal doesn't cover it).
+- Because touch has no hover, every tooltip's copy is also reachable on the page: causes
+  via the "What do these mean?" key, confidence via the legend above the cards.
+- **`.directory-zone` bounds the sticky filter bar.** A sticky element is limited by its
+  parent's box, so the bar releases where the directory ends instead of following past
+  the remote section it does not filter. Do not move `#remote-section` inside it, and do
+  not give the zone `overflow`, `transform` or `filter` — each silently breaks sticky.
+- The country layer **fades out above zoom 10 and is gone by zoom 12**: 1:10m boundaries
+  are roughly 2 km between vertices and would visibly miss the real border at street
+  level, where a country tint tells you nothing anyway.
+- On screens under 800 px each filter row is a **single horizontally scrollable line**,
+  not a wrapping block. Wrapping 12 cause chips at phone width produced a 529 px sticky
+  bar (65% of the screen); this keeps it near 136 px.
 - Long lists collapse: the card grid opens at `CARD_LIMIT` (9) and the remote cause groups
   start closed. Expanded state persists across filter changes on purpose.
 - Filter rows are labelled (Cause / Type / Country) and country uses a **segmented

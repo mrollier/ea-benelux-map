@@ -8,17 +8,30 @@ let countryLayer = null;
 let selectedCountries = new Set();
 let didFitBounds = false;
 
+// Bundled boundaries are Natural Earth 1:10m — about 2 km between vertices, which is
+// honest at the zooms this map is browsed at and a visible lie once you are looking at
+// a single town. So the layer fades out as you zoom past its own resolution: full up to
+// z10, half at z11, gone from z12. It also stops mattering there — a country tint tells
+// you nothing when the whole screen is one city. Leaflet zooms in integer steps, so the
+// fade is one intermediate step rather than continuous.
+function zoomFade() {
+  const z = map ? map.getZoom() : 0;
+  if (z <= 10) return 1;
+  if (z >= 12) return 0;
+  return 0.5;
+}
+
 // Selected countries are tinted and outlined; deselected ones are drawn with nothing at
 // all. The fill is deliberately faint — the cause-coloured pins must stay the loudest
 // marks on the map, and a country wash competing with them would bury the actual data.
 function countryStyle(feature) {
-  const on = selectedCountries.has(feature.properties.code);
+  const k = selectedCountries.has(feature.properties.code) ? zoomFade() : 0;
   return {
-    color: on ? "#2e7d46" : "transparent",
-    weight: on ? 2 : 0,
-    opacity: on ? 0.75 : 0,
+    color: k ? "#2e7d46" : "transparent",
+    weight: k ? 2 : 0,
+    opacity: 0.75 * k,
     fillColor: "#2e7d46",
-    fillOpacity: on ? 0.09 : 0,
+    fillOpacity: 0.09 * k,
   };
 }
 
@@ -38,6 +51,7 @@ function initCountryLayer() {
       });
       countryLayer.addTo(map);
       countryLayer.bringToBack();
+      map.on("zoomend", () => countryLayer.setStyle(countryStyle));
       if (!didFitBounds) {
         // Framing the three countries rather than the pins keeps the view stable and
         // guarantees Luxembourg is in shot even though it holds a single organisation.
@@ -69,7 +83,7 @@ function initDismissPopup() {
   });
 }
 
-export function initMap({ onDetails, tierDefinitions }) {
+export function initMap({ onDetails }) {
   map = L.map("map", { scrollWheelZoom: true });
 
   L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
@@ -93,7 +107,6 @@ export function initMap({ onDetails, tierDefinitions }) {
 
   // stash for popup building
   map._onDetails = onDetails;
-  map._tierDefinitions = tierDefinitions;
 
   // sensible default until the country outlines (or the pins) fit real bounds
   map.setView([50.85, 4.4], 8);
@@ -111,7 +124,7 @@ function buildPopup(org) {
       "p",
       { class: "popup-meta" },
       org.shortCity,
-      tierBadge(org, map._tierDefinitions),
+      tierBadge(org),
       confidenceBadge(org.confidence, true)
     ),
     el(

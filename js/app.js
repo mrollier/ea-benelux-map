@@ -3,6 +3,7 @@
 import * as ui from "./ui.js";
 import { initMap, setMapOrgs, setCountryHighlight } from "./map.js";
 import { toCSV, downloadCSV } from "./download.js";
+import { initTooltips } from "./tooltip.js";
 
 const state = {
   causes: new Set(), // empty = all causes
@@ -129,7 +130,7 @@ function render() {
     (a, b) => a.tier - b.tier || a.name.localeCompare(b.name)
   );
   const limit = state.cardsExpanded ? null : ui.CARD_LIMIT;
-  ui.renderCards(document.getElementById("cards"), sorted, tierDefinitions, openModal, limit);
+  ui.renderCards(document.getElementById("cards"), sorted, openModal, limit);
   ui.renderShowMore(
     document.getElementById("cards-more"),
     sorted.length,
@@ -140,7 +141,7 @@ function render() {
   renderGapBanner();
 
   ui.renderCauseChips(document.getElementById("cause-chips"), causeList, state, toggleCause);
-  ui.renderTierChips(document.getElementById("tier-chips"), tierDefinitions, state, toggleTier);
+  ui.renderTierChips(document.getElementById("tier-chips"), state, toggleTier);
   ui.renderCountryChips(document.getElementById("country-chips"), state, toggleCountry);
 
   const line = document.getElementById("results-line");
@@ -178,6 +179,21 @@ function toggleGroup(cause) {
   if (state.openGroups.has(cause)) state.openGroups.delete(cause);
   else state.openGroups.add(cause);
   render();
+}
+
+/* ---------- Cause key ---------- */
+
+// The tooltips explain each cause on hover, which no phone has. The key is the same copy
+// as a plain expandable list, so the vocabulary is reachable on every device.
+function initCauseKey() {
+  const toggle = document.getElementById("cause-key-toggle");
+  const panel = document.getElementById("cause-key");
+  ui.renderCauseKey(panel, causeList);
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    panel.hidden = open;
+  });
 }
 
 /* ---------- Downloads ---------- */
@@ -252,8 +268,10 @@ async function boot() {
 
   ui.initModal();
   ui.renderConfidenceLegend(document.getElementById("conf-legend"));
+  initCauseKey();
+  initTooltips();
   initDownloads();
-  initMap({ onDetails: openModal, tierDefinitions });
+  initMap({ onDetails: openModal });
   render();
 }
 

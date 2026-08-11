@@ -30,48 +30,65 @@
     </p>
   </header>
 
-  <nav class="filter-bar" aria-label="Filters">
-    <!-- Each row filters a different dimension, so each is named. The country row uses a
-         segmented control rather than loose chips — a different shape for a different job. -->
-    <div class="filter-line">
-      <span class="filter-label" aria-hidden="true">Cause</span>
-      <div class="chip-row" id="cause-chips" role="group" aria-label="Filter by cause area"></div>
-    </div>
-    <div class="filter-line">
-      <span class="filter-label" aria-hidden="true">Type</span>
-      <div class="chip-row" id="tier-chips" role="group" aria-label="Filter by organisation type"></div>
-    </div>
-    <div class="filter-line">
-      <span class="filter-label" aria-hidden="true">Country</span>
-      <div class="chip-row" id="country-chips" role="group" aria-label="Filter by country"></div>
-    </div>
-  </nav>
-
-  <div id="gap-banner" class="gap-banner" hidden></div>
-
-  <main>
-    <section class="hero">
-      <div class="map-frame">
-        <div id="map" aria-label="Map of organisations in the BeNeLux"></div>
+  <!-- Everything the filter bar actually controls lives inside this wrapper. A sticky
+       element is bounded by its parent's box, so the bar releases exactly here — at the
+       end of the directory — instead of following down past the remote section, where it
+       filters nothing. Do not give this element overflow, transform or filter: any of
+       them would break the sticky child. -->
+  <div class="directory-zone">
+    <nav class="filter-bar" aria-label="Filters">
+      <!-- Each row filters a different dimension, so each is named. Type and Country
+           share a line to keep the sticky bar short. The country control is segmented
+           rather than loose chips — a different shape for a different job. -->
+      <div class="filter-line">
+        <span class="filter-label" aria-hidden="true">Cause</span>
+        <div class="chip-row" id="cause-chips" role="group" aria-label="Filter by cause area"></div>
+        <button type="button" id="cause-key-toggle" class="cause-key-toggle"
+                aria-expanded="false" aria-controls="cause-key">What do these mean?</button>
       </div>
-    </section>
+      <div class="filter-line filter-line--split">
+        <div class="filter-group">
+          <span class="filter-label" aria-hidden="true">Type</span>
+          <div class="chip-row" id="tier-chips" role="group" aria-label="Filter by organisation type"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label" aria-hidden="true">Country</span>
+          <div class="chip-row" id="country-chips" role="group" aria-label="Filter by country"></div>
+        </div>
+      </div>
+    </nav>
 
-    <div class="results-bar">
-      <p id="results-line" class="results-line" aria-live="polite"></p>
-      <div id="download-row" class="download-row"></div>
-    </div>
-    <p id="conf-legend" class="conf-legend"></p>
+    <!-- Outside the bar on purpose: opening the key must not inflate the sticky element. -->
+    <div id="cause-key" class="cause-key" hidden></div>
 
-    <section id="cards" class="card-grid" aria-label="Organisation directory"></section>
-    <div id="cards-more" class="cards-more"></div>
+    <div id="gap-banner" class="gap-banner" hidden></div>
 
+    <main>
+      <section class="hero">
+        <div class="map-frame">
+          <div id="map" aria-label="Map of organisations in the BeNeLux"></div>
+        </div>
+      </section>
+
+      <div class="results-bar">
+        <p id="results-line" class="results-line" aria-live="polite"></p>
+        <div id="download-row" class="download-row"></div>
+      </div>
+      <p id="conf-legend" class="conf-legend"></p>
+
+      <section id="cards" class="card-grid" aria-label="Organisation directory"></section>
+      <div id="cards-more" class="cards-more"></div>
+    </main>
+  </div>
+
+  <div class="page-width">
     <section id="remote-section" class="remote-shelf" aria-labelledby="remote-title">
       <h2 id="remote-title">Remote EA organisations</h2>
       <p class="shelf-sub">No office in the BeNeLux, but remote-first — many plausibly hire from here.
          Grouped by cause area; open a group to see the organisations in it.</p>
       <div id="remote-list"></div>
     </section>
-  </main>
+  </div>
 
   <footer class="site-footer">
     <p id="dataset-note"></p>

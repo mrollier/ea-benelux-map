@@ -30,10 +30,12 @@ The app fetches `ea_belgium_orgs.json` at runtime, which browsers block on `file
 serve the folder with any static server:
 
 ```sh
+cd ea-benelux-map        # the folder holding index.html, not its parent
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:8000>. If you see a bare list of file names instead of the
+map, the server is running one directory too high up.
 
 ## The data
 

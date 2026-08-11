@@ -78,12 +78,12 @@ a { color: var(--accent); }
   background: color-mix(in srgb, var(--bg) 90%, white);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--hairline);
-  padding: 12px 20px;
-  margin-top: 20px;
+  padding: 8px 20px;
+  margin-top: 16px;
 }
 
-/* One row per filter dimension, each named, so it is obvious the three rows are not
-   three flavours of the same control. */
+/* Cause gets its own row (11 chips, and it is the filter people came for); Type and
+   Country share the second, each still named so the two are not read as one control. */
 .filter-line {
   max-width: 1100px;
   margin: 0 auto;
@@ -92,35 +92,97 @@ a { color: var(--accent); }
   gap: 12px;
 }
 
-.filter-line + .filter-line { margin-top: 8px; }
+.filter-line + .filter-line { margin-top: 6px; }
+
+.filter-line--split {
+  flex-wrap: wrap;
+  column-gap: 28px;
+  row-gap: 6px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
 
 .filter-label {
   flex: none;
-  width: 64px;
-  font-size: 0.68rem;
+  width: 54px;
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
 
+/* Country's label sits mid-row, so it should not reserve the left gutter width. */
+.filter-line--split .filter-group + .filter-group .filter-label { width: auto; }
+
 .chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
+}
+
+/* Opens the on-page cause key. Sits in the bar; the panel it opens does not, so the
+   sticky element never grows. */
+.cause-key-toggle {
+  flex: none;
+  align-self: center;
+  margin-left: auto;
+  border: none;
+  background: none;
+  padding: 2px 0;
+  font-family: inherit;
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cause-key-toggle:hover { color: var(--accent); }
+.cause-key-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cause-key-toggle[aria-expanded="true"] { color: var(--accent); }
+
+.cause-key {
+  max-width: 1100px;
+  margin: 10px auto 0;
+  padding: 12px 18px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px 22px 6px 22px;
+  font-size: 0.82rem;
+  color: var(--ink-2);
+}
+
+.cause-key-item { margin: 0 0 6px; }
+.cause-key-item:last-child { margin-bottom: 0; }
+.cause-key-item strong { color: var(--ink); }
+
+.cause-key .key-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  margin-right: 7px;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   border: 1px solid var(--hairline);
   background: var(--surface);
   color: var(--ink-2);
   border-radius: 4px 16px 4px 16px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
+  padding: 4px 11px;
+  font-size: 0.82rem;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
@@ -146,7 +208,7 @@ a { color: var(--accent); }
 
 .chip[aria-pressed="true"] .dot { background: #f7f9f2; }
 
-.chip.tier-chip { border-radius: 12px 4px 12px 4px; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.07em; }
+.chip.tier-chip { border-radius: 12px 4px 12px 4px; text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.07em; }
 
 .chip.tier-chip[aria-pressed="true"] {
   background: var(--chip-tint);
@@ -172,8 +234,8 @@ a { color: var(--accent); }
   background: transparent;
   color: var(--ink-2);
   font-family: inherit;
-  font-size: 0.82rem;
-  padding: 6px 16px;
+  font-size: 0.78rem;
+  padding: 4px 14px;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.15s, color 0.15s;
@@ -221,6 +283,14 @@ a { color: var(--accent); }
 /* ---------- Hero: map + remote shelf ---------- */
 
 main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* The remote section sits outside <main> (see .directory-zone in index.html), so it
+   needs the width and gutter <main> used to give it. */
+.page-width {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
@@ -326,6 +396,17 @@ main {
   padding: 4px 0 4px 14px;
 }
 
+/* What this cause area actually is, at the moment someone opens it. Same sentence as
+   the chip tooltip and the cause key — one source of copy, three surfaces. */
+.shelf-note {
+  margin: 2px 0 8px;
+  max-width: 70ch;
+  padding-left: 10px;
+  border-left: 2px solid var(--hairline);
+  font-size: 0.82rem;
+  color: var(--ink-2);
+}
+
 .shelf-row {
   display: flex;
   align-items: center;
@@ -412,8 +493,13 @@ main {
 
 .download-label { color: var(--ink-3); }
 
+/* One is a <button>, the other an <a>. A button's UA line-height is `normal` while the
+   link inherits body's 1.55, so identical padding produced two different heights.
+   Pinning display, alignment and line-height makes the two boxes identical. */
 .download-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.4;
   border: 1px solid var(--hairline);
   background: var(--surface);
   color: var(--ink-2);
@@ -738,6 +824,27 @@ main {
 
 .site-footer p { max-width: 70ch; margin: 6px auto; }
 
+/* ---------- Tooltip ---------- */
+
+/* Replaces the browser's native title= box everywhere (js/tooltip.js). Dark on light so
+   it reads as an overlay rather than another card, and above the sticky bar's 1200.
+   Positioned in viewport coordinates by JS, so no transform or margin here. */
+.app-tip {
+  position: fixed;
+  z-index: 1300;
+  max-width: 280px;
+  padding: 8px 11px;
+  border-radius: 4px 14px 4px 14px;
+  background: var(--ink);
+  color: #f7f4e6;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  box-shadow: 0 3px 12px rgba(51, 48, 31, 0.28);
+  pointer-events: none; /* must never sit between the cursor and the thing it explains */
+}
+
+.app-tip[hidden] { display: none; }
+
 /* ---------- Load error ---------- */
 
 .load-error {
@@ -762,16 +869,39 @@ main {
 @media (max-width: 800px) {
   #map { height: 380px; }
 
-  /* Labels move above their controls — at 64px wide they were stealing the row. */
-  .filter-line { flex-direction: column; align-items: stretch; gap: 4px; }
+  /* Wrapping 12 cause chips at phone width built a 444px sticky bar — over half the
+     screen, permanently. Each row becomes one swipeable line instead, which keeps every
+     filter reachable and the bar around a tenth of the screen. Labels stay inline: at
+     54px they cost less than the line they'd otherwise add. */
+  .filter-line { flex-wrap: wrap; align-items: center; gap: 8px; }
+  .filter-group { align-items: center; min-width: 0; }
   .filter-label { width: auto; }
+  .filter-line--split { flex-direction: column; align-items: stretch; row-gap: 6px; }
 
-  .segmented { align-self: flex-start; max-width: 100%; }
-  .seg-btn { padding: 6px 12px; font-size: 0.78rem; }
+  .chip-row {
+    /* `flex: 1 1 0` is what keeps the label beside the row: a nowrap scroll container
+       has the intrinsic width of all its chips (2100px here) and would otherwise push
+       itself onto its own line. */
+    flex: 1 1 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain; /* swiping the chips must not swipe the page */
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .chip-row::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+
+  /* `margin-left: auto` would push it off the end of the row it shares with the chips. */
+  .cause-key-toggle { flex-basis: 100%; margin-left: 0; text-align: left; }
+
+  .segmented { flex: none; max-width: 100%; }
+  .seg-btn { padding: 5px 12px; font-size: 0.76rem; }
 
   .results-bar { flex-direction: column; align-items: flex-start; }
   .remote-shelf { padding: 18px 16px 16px; }
   .shelf-panel { padding-left: 8px; }
+  .app-tip { max-width: min(280px, calc(100vw - 24px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

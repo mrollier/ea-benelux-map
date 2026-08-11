@@ -17,7 +17,48 @@ const FALLBACK_COLOR = "#8f8a68";
 
 export const causeColor = (cause) => CAUSE_COLORS[cause] || FALLBACK_COLOR;
 
+// One plain sentence per cause area, for readers who have never met the vocabulary.
+// This is the single source of that copy: it feeds the chip tooltips, the on-page cause
+// key, and the note at the top of each remote group. Covers every value in the data,
+// including the three legacy ones (see CLAUDE.md) — an unlisted cause simply gets no
+// explanation rather than a wrong one.
+export const CAUSE_EXPLAIN = {
+  "AI safety & governance":
+    "Making advanced AI systems safe, and shaping the rules and institutions that govern them.",
+  "Biosecurity & pandemic preparedness":
+    "Preventing the next pandemic — lab safety, pathogen surveillance, stockpiles, treaties.",
+  "Animal welfare & food systems":
+    "Reducing the suffering of farmed and wild animals, and shifting food systems away from factory farming.",
+  "Global health & development":
+    "Cheap, proven ways to save lives and raise incomes in the world's poorest places.",
+  "Effective giving & meta":
+    "Helping money reach the highest-impact charities, and building the research and infrastructure the field runs on.",
+  "Climate": "Cutting emissions and reducing the worst-case risks of a warming planet.",
+  "Careers & talent":
+    "Helping people find and move into work where they can do the most good.",
+  "Community building":
+    "Growing and supporting local and student groups, events and networks.",
+  "Mental health":
+    "Improving mental health and wellbeing, especially where treatment is scarcest.",
+  "Emerging tech governance":
+    "Steering powerful new technologies — beyond AI — before their risks are locked in.",
+  "EU policy (general)":
+    "Working the Brussels policy machine across several EA-relevant files rather than one cause.",
+};
+
+export const causeExplain = (cause) => CAUSE_EXPLAIN[cause] || null;
+
 export const TIER_SHORT = { 1: "Core EA", 2: "EA-funded", 3: "Cause-adjacent", 4: "Remote" };
+
+// Display-layer wording, like CONF_LABEL below: `meta.tier_definitions` in the JSON is a
+// note to ourselves ("OP/Coefficient, EA evaluators, EA talent networks") and reads as
+// jargon to the audience this map is for. The data is untouched.
+const TIER_EXPLAIN = {
+  1: "Core EA: identifies with effective altruism (or Moral Ambition), or is mostly EA-funded.",
+  2: "EA-funded: funded or endorsed by EA institutions — Open Philanthropy, Coefficient Giving, EA charity evaluators — without calling itself EA.",
+  3: "Cause-adjacent: works on an EA cause area from the BeNeLux, with no known link to EA.",
+  4: "Remote: an EA organisation with no BeNeLux office that plausibly hires people based here.",
+};
 
 // The underlying data field is still high/medium/low — this is a display-layer rename.
 // "High confidence" told a newcomer nothing about what had actually been done; these
@@ -64,7 +105,7 @@ export function confidenceBadge(level, compact = false) {
     "span",
     {
       class: `confidence conf-${level || "low"}${compact ? " conf-compact" : ""}`,
-      title: CONF_EXPLAIN[level] || CONF_EXPLAIN.low,
+      "data-tip": CONF_EXPLAIN[level] || CONF_EXPLAIN.low,
     },
     el("span", { class: "conf-dot" }),
     label
@@ -93,10 +134,32 @@ export function renderConfidenceLegend(container) {
   );
 }
 
-export function tierBadge(org, tierDefinitions) {
+// The same explanatory copy as the cause key, one level down: hover doesn't exist on
+// touch, so every cause area is also spelled out on the page. Built once at boot —
+// the taxonomy doesn't change while the page is open.
+export function renderCauseKey(container, causeList) {
+  container.replaceChildren(
+    ...causeList
+      .filter((cause) => CAUSE_EXPLAIN[cause])
+      .map((cause) => {
+        const dot = el("span", { class: "key-dot", "aria-hidden": "true" });
+        dot.style.background = causeColor(cause);
+        return el(
+          "p",
+          { class: "cause-key-item" },
+          dot,
+          el("strong", {}, cause),
+          " ",
+          CAUSE_EXPLAIN[cause]
+        );
+      })
+  );
+}
+
+export function tierBadge(org) {
   return el(
     "span",
-    { class: "tier-badge", title: `Tier ${org.tier}: ${tierDefinitions[org.tier] || ""}` },
+    { class: "tier-badge", "data-tip": TIER_EXPLAIN[org.tier] || "" },
     TIER_SHORT[org.tier] || `Tier ${org.tier}`
   );
 }
@@ -110,7 +173,7 @@ export function orgTypeBadge(org) {
     "span",
     {
       class: "type-badge",
-      title: "For-profit company working on an EA cause area — not a charity",
+      "data-tip": "For-profit company working on an EA cause area — not a charity.",
     },
     "Company"
   );
@@ -119,7 +182,9 @@ export function orgTypeBadge(org) {
 function causeTags(org, max = 3) {
   const wrap = el("div", { class: "cause-chips" });
   org.cause_areas.slice(0, max).forEach((cause) => {
-    const tag = el("span", { class: "cause-tag" }, cause);
+    const attrs = { class: "cause-tag" };
+    if (CAUSE_EXPLAIN[cause]) attrs["data-tip"] = CAUSE_EXPLAIN[cause];
+    const tag = el("span", attrs, cause);
     tag.style.setProperty("--tag-color", causeColor(cause));
     wrap.append(tag);
   });
@@ -138,22 +203,22 @@ export function renderCauseChips(container, causeList, state, onToggle) {
     {
       class: "chip",
       "aria-pressed": String(state.causes.size === 0),
+      "data-tip": "Show every organisation, whatever it works on.",
       onclick: () => onToggle(null),
     },
     "All causes"
   );
   container.append(allChip);
   causeList.forEach((cause) => {
-    const chip = el(
-      "button",
-      {
-        class: "chip",
-        "aria-pressed": String(state.causes.has(cause)),
-        onclick: () => onToggle(cause),
-      },
-      el("span", { class: "dot" }),
-      cause
-    );
+    const attrs = {
+      class: "chip",
+      "aria-pressed": String(state.causes.has(cause)),
+      onclick: () => onToggle(cause),
+    };
+    // The chip label is the only place most readers meet these terms, so hovering one
+    // explains it rather than just filtering by it.
+    if (CAUSE_EXPLAIN[cause]) attrs["data-tip"] = CAUSE_EXPLAIN[cause];
+    const chip = el("button", attrs, el("span", { class: "dot" }), cause);
     chip.style.setProperty("--chip-color", causeColor(cause));
     container.append(chip);
   });
@@ -172,7 +237,7 @@ export function renderCountryChips(container, state, onToggle) {
         {
           class: "seg-btn",
           "aria-pressed": String(state.countries.has(code)),
-          title: `Show organisations in ${COUNTRY_LABELS[code]}`,
+          "data-tip": `Show organisations based in ${COUNTRY_LABELS[code]}, and tint it on the map.`,
           onclick: () => onToggle(code),
         },
         COUNTRY_LABELS[code]
@@ -184,7 +249,7 @@ export function renderCountryChips(container, state, onToggle) {
 
 // Tier 4 (remote) is deliberately absent: remote organisations have their own section
 // further down the page rather than a filter chip, so they are never listed twice.
-export function renderTierChips(container, tierDefinitions, state, onToggle) {
+export function renderTierChips(container, state, onToggle) {
   container.replaceChildren();
   [1, 2, 3].forEach((tier) => {
     container.append(
@@ -193,7 +258,7 @@ export function renderTierChips(container, tierDefinitions, state, onToggle) {
         {
           class: "chip tier-chip",
           "aria-pressed": String(state.tiers.has(tier)),
-          title: `Tier ${tier}: ${tierDefinitions[tier] || ""}`,
+          "data-tip": TIER_EXPLAIN[tier],
           onclick: () => onToggle(tier),
         },
         `${TIER_SHORT[tier]}`
@@ -208,7 +273,7 @@ export const CARD_LIMIT = 9;
 
 // `limit` caps how many cards are drawn (null = all). Dropping 113 tiles on someone at
 // once reads as a wall rather than a directory, so the grid opens on a readable handful.
-export function renderCards(container, orgs, tierDefinitions, onOpen, limit = null) {
+export function renderCards(container, orgs, onOpen, limit = null) {
   container.replaceChildren();
   if (orgs.length === 0) {
     container.append(
@@ -243,7 +308,7 @@ export function renderCards(container, orgs, tierDefinitions, onOpen, limit = nu
         "p",
         { class: "meta" },
         org.shortCity,
-        tierBadge(org, tierDefinitions),
+        tierBadge(org),
         orgTypeBadge(org)
       ),
       causeTags(org),
@@ -303,14 +368,16 @@ export function renderShelf(container, orgs, onOpen, openGroups, onToggleGroup) 
   ordered.forEach(([cause, members], i) => {
     const open = openGroups.has(cause);
     const panelId = `shelf-panel-${i}`;
+    const headAttrs = {
+      class: "shelf-group",
+      "aria-expanded": String(open),
+      "aria-controls": panelId,
+      onclick: () => onToggleGroup(cause),
+    };
+    if (CAUSE_EXPLAIN[cause]) headAttrs["data-tip"] = CAUSE_EXPLAIN[cause];
     const heading = el(
       "button",
-      {
-        class: "shelf-group",
-        "aria-expanded": String(open),
-        "aria-controls": panelId,
-        onclick: () => onToggleGroup(cause),
-      },
+      headAttrs,
       el("span", { class: "shelf-chevron", "aria-hidden": "true" }, open ? "▾" : "▸"),
       el("span", { class: "shelf-group-name" }, cause),
       el("span", { class: "shelf-group-count" }, String(members.length))
@@ -320,13 +387,18 @@ export function renderShelf(container, orgs, onOpen, openGroups, onToggleGroup) 
     const panel = el("div", { class: "shelf-panel", id: panelId });
     if (!open) panel.hidden = true;
     else {
+      // Opening a group is the moment someone is deciding whether this cause is theirs,
+      // so the explanation goes here rather than only in a tooltip they may never hover.
+      if (CAUSE_EXPLAIN[cause]) {
+        panel.append(el("p", { class: "shelf-note" }, CAUSE_EXPLAIN[cause]));
+      }
       members.forEach((org) => {
         const dot = el("span", { class: "dot", "aria-hidden": "true" });
         dot.style.background = causeColor(org.cause_areas[0]);
         panel.append(
           el(
             "button",
-            { class: "shelf-row", onclick: () => onOpen(org), title: org.name },
+            { class: "shelf-row", onclick: () => onOpen(org), "data-tip": org.name },
             dot,
             el("span", { class: "name" }, org.name),
             orgTypeBadge(org),
@@ -370,7 +442,7 @@ export function openOrgModal(org, tierDefinitions) {
       "p",
       { class: "modal-meta" },
       metaBits.join(" · "),
-      tierBadge(org, tierDefinitions),
+      tierBadge(org),
       orgTypeBadge(org),
       confidenceBadge(org.confidence)
     )
