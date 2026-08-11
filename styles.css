@@ -1,0 +1,779 @@
+/* EA Belgium Landscape Map — Field Guide design: warm earth tones, leaf-shaped
+   markers, organic asymmetric radii. Committed single-look (light) design. */
+
+:root {
+  --bg: #f3f0e4;
+  --surface: #fbf9f0;
+  --ink: #33301f;
+  --ink-2: #5c5738;
+  --ink-3: #8f8a68;
+  --hairline: #d8d1b2;
+  --accent: #2e7d46;
+  --chip-tint: #e4dfc8;
+  --shadow: 0 1px 3px rgba(51, 48, 31, 0.07), 0 4px 14px rgba(51, 48, 31, 0.05);
+  --conf-high: #2e7d46;
+  --conf-medium: #b07800;
+  --conf-low: #a29a77;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+a { color: var(--accent); }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 8px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.site-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.site-header h1 em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.intro {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ink-2);
+  font-size: 1.05rem;
+}
+
+/* ---------- Filter bar ---------- */
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  /* Leaflet's own controls are z-index 1000 (leaflet.css), so matching that value let
+     them paint over this bar on scroll. The real fix is the stacking context on
+     .map-frame below; this stays above it as a second line of defence. */
+  z-index: 1200;
+  background: color-mix(in srgb, var(--bg) 90%, white);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--hairline);
+  padding: 12px 20px;
+  margin-top: 20px;
+}
+
+/* One row per filter dimension, each named, so it is obvious the three rows are not
+   three flavours of the same control. */
+.filter-line {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.filter-line + .filter-line { margin-top: 8px; }
+
+.filter-label {
+  flex: none;
+  width: 64px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  border-radius: 4px 16px 4px 16px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.chip:hover { border-color: var(--ink-3); }
+
+.chip .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--chip-color, var(--ink-3));
+  flex: none;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #f7f9f2;
+  font-weight: 600;
+}
+
+.chip[aria-pressed="true"] .dot { background: #f7f9f2; }
+
+.chip.tier-chip { border-radius: 12px 4px 12px 4px; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.07em; }
+
+.chip.tier-chip[aria-pressed="true"] {
+  background: var(--chip-tint);
+  border-color: var(--ink-2);
+  color: var(--ink);
+}
+
+/* ---------- Segmented control (country) ---------- */
+
+/* Country asks "where", not "what" — a joined switch rather than loose chips, so the
+   two rows are not mistaken for two halves of the same filter. */
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--ink-3);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.seg-btn {
+  border: none;
+  border-left: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 6px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.seg-btn:first-child { border-left: none; }
+.seg-btn:hover { background: var(--chip-tint); }
+
+.seg-btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: #f7f9f2;
+  font-weight: 600;
+  border-left-color: var(--accent);
+}
+
+.seg-btn[aria-pressed="true"] + .seg-btn { border-left-color: var(--accent); }
+.seg-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* ---------- Gap banner ---------- */
+
+.gap-banner {
+  max-width: 1100px;
+  margin: 16px auto 0;
+  padding: 14px 18px;
+  border-radius: 6px 22px 6px 22px;
+  background: #e9efdd;
+  border: 1px solid #c6d1ab;
+  border-left: 4px solid var(--accent);
+  color: #3d4a2a;
+  font-size: 0.95rem;
+}
+
+.gap-banner strong { color: #2c3820; }
+
+.gap-banner .gap-org-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Hero: map + remote shelf ---------- */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero { margin-top: 20px; }
+
+.map-frame {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 18px 48px 18px 48px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+  /* Own stacking context: contains every Leaflet z-index (its controls sit at 1000)
+     so nothing from inside the map can paint over the sticky filter bar on scroll. */
+  position: relative;
+  z-index: 0;
+}
+
+#map {
+  height: 520px;
+  border-radius: 12px 40px 12px 40px;
+  background: #e9e5d4;
+}
+
+/* ---------- Remote section (own section since v0.6, no longer a sidebar) ---------- */
+
+.remote-shelf {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 48px 18px 48px 18px;
+  box-shadow: var(--shadow);
+  padding: 22px 24px 20px;
+  margin: 8px 0 40px;
+}
+
+.remote-shelf h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.shelf-sub {
+  margin: 4px 0 14px;
+  max-width: 70ch;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+#remote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Cause-area groups are collapsible headers (v0.6): the counts alone show the shape of
+   the remote landscape, and a reader opens only the cause they came for. */
+.shelf-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--group-color, var(--hairline));
+  border-radius: 4px 14px 4px 14px;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.shelf-group:first-child { margin-top: 0; }
+.shelf-group:hover { background: var(--bg); }
+.shelf-group[aria-expanded="true"] { background: var(--bg); }
+.shelf-group:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.shelf-chevron {
+  flex: none;
+  width: 12px;
+  color: var(--group-color, var(--ink-3));
+  font-size: 0.8rem;
+}
+
+.shelf-group-name { flex: 1; min-width: 0; }
+
+.shelf-group-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+.shelf-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0 4px 14px;
+}
+
+.shelf-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px 18px 4px 18px;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.shelf-row:hover { background: var(--bg); border-color: var(--hairline); }
+
+.shelf-row .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  flex: none;
+}
+
+.shelf-row .name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Confidence indicator ---------- */
+
+.confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.confidence .conf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.conf-high .conf-dot { background: var(--conf-high); }
+.conf-medium .conf-dot { background: var(--conf-medium); }
+.conf-low .conf-dot { background: var(--conf-low); }
+
+/* Dense rows (cards, shelf) — same words, tighter type. */
+.confidence.conf-compact { font-size: 0.72rem; gap: 4px; }
+.confidence.conf-compact .conf-dot { width: 7px; height: 7px; }
+
+/* ---------- Cards ---------- */
+
+.results-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 6px;
+}
+
+.results-line {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+.download-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.download-label { color: var(--ink-3); }
+
+.download-btn {
+  display: inline-block;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  border-radius: 4px 14px 4px 14px;
+  padding: 4px 12px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.download-btn:hover { border-color: var(--ink-3); background: var(--chip-tint); }
+
+/* The confidence scale spelled out on the page. Tooltips are invisible on touch, and
+   this is the one key a newcomer needs in order to read every badge below it. */
+.conf-legend {
+  margin: 0 0 16px;
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  line-height: 1.7;
+}
+
+.conf-legend .legend-item { margin-right: 4px; }
+.conf-legend .legend-item strong { color: var(--ink-2); }
+.conf-legend .legend-sep { margin: 0 6px; color: var(--hairline); }
+
+/* The legend reuses only the conf-* dot colours, not the .confidence badge layout, so
+   it wraps like the paragraph it is. */
+.conf-legend .conf-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.cards-more {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 8px;
+}
+
+.show-more {
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  border-radius: 6px 20px 6px 20px;
+  padding: 8px 22px;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.show-more:hover { border-color: var(--ink-3); background: var(--chip-tint); }
+.show-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The card's own border carries the primary cause colour (v0.6, replacing a decorative
+   pin in the corner) — the colour now traces the whole card instead of sitting in it. */
+.card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--card-color, var(--ink-3)) 45%, var(--hairline));
+  border-radius: 6px 26px 6px 26px;
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.card:hover, .card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(51, 48, 31, 0.1), 0 8px 24px rgba(51, 48, 31, 0.08);
+  outline: none;
+}
+
+.card:focus-visible { border-color: var(--accent); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.card .meta {
+  margin: 3px 0 8px;
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tier-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 3px 9px 3px 9px;
+  padding: 1px 8px;
+  background: var(--chip-tint);
+  border: 1px solid var(--hairline);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* For-profit marker (v0.5). Deliberately quieter than the tier badge — it is a caveat,
+   not a category — but outlined so it reads as a distinct kind of thing, not another tag. */
+.type-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 3px 9px 3px 9px;
+  padding: 1px 7px;
+  background: transparent;
+  border: 1px dashed var(--hairline);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.cause-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.cause-tag {
+  font-size: 0.72rem;
+  border-radius: 3px 11px 3px 11px;
+  padding: 2px 9px;
+  background: color-mix(in srgb, var(--tag-color, var(--ink-3)) 13%, #fbf9f0);
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--tag-color, var(--ink-3)) 30%, #fbf9f0);
+}
+
+.card .desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--ink-2);
+  padding: 40px 0;
+}
+
+.shelf-empty {
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  padding: 10px 0;
+}
+
+/* ---------- Leaflet chrome: pins, clusters, popups ---------- */
+
+.leaf-pin {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--c, var(--ink-3));
+  border: 2px solid #fbf9f0;
+  box-shadow: 0 1px 3px rgba(51, 48, 31, 0.35);
+}
+
+.leaflet-marker-icon:focus-visible .leaf-pin { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.cluster-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2.5px solid var(--accent);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 1px 4px rgba(51, 48, 31, 0.3);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: 6px 22px 6px 22px;
+  box-shadow: var(--shadow);
+}
+
+.leaflet-popup-tip { background: var(--surface); }
+
+.leaflet-popup-content { margin: 12px 14px; font-family: inherit; }
+.popup-name { font-weight: 600; margin: 0 0 2px; font-size: 0.95rem; }
+.popup-meta { font-size: 0.78rem; color: var(--ink-2); margin: 0 0 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.popup-desc { font-size: 0.83rem; margin: 0 0 8px; color: var(--ink-2); }
+
+.popup-details-btn, .modal-link-btn {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px 14px 4px 14px;
+  background: var(--accent);
+  color: #f7f9f2;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+/* ---------- Modal ---------- */
+
+#org-modal {
+  border: 1px solid var(--hairline);
+  border-radius: 8px 30px 8px 30px;
+  box-shadow: 0 10px 40px rgba(51, 48, 31, 0.3);
+  padding: 0;
+  background: var(--surface);
+  color: var(--ink);
+  width: min(620px, calc(100vw - 32px));
+  max-height: min(82vh, 720px);
+}
+
+#org-modal::backdrop { background: rgba(51, 48, 31, 0.45); }
+
+#modal-content { padding: 24px 26px 26px; }
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: 1px solid var(--hairline);
+  background: var(--bg);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+
+.modal-close:hover { background: var(--chip-tint); }
+
+#org-modal h2 { margin: 0 26px 2px 0; font-size: 1.3rem; line-height: 1.3; }
+.modal-aka { color: var(--ink-2); font-size: 0.88rem; margin: 0 0 4px; }
+.modal-meta { color: var(--ink-2); font-size: 0.88rem; margin: 0 0 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.modal-section { margin: 14px 0 0; }
+.modal-section h4 {
+  margin: 0 0 3px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.modal-section p { margin: 0; font-size: 0.92rem; }
+.modal-section ul { margin: 0; padding-left: 18px; font-size: 0.86rem; }
+.modal-section li { overflow-wrap: anywhere; }
+
+/* tier definition reads as a field note */
+.modal-section p.tier-note { font-family: Georgia, "Times New Roman", serif; font-style: italic; color: var(--ink-2); }
+
+.modal-conf {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: 4px 18px 4px 18px;
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  font-size: 0.88rem;
+}
+
+.modal-links { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+
+.modal-links a {
+  display: inline-block;
+  border-radius: 4px 14px 4px 14px;
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.modal-links a.primary { background: var(--accent); color: #f7f9f2; }
+.modal-links a.secondary { background: var(--bg); color: var(--ink); border: 1px solid var(--hairline); }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  margin-top: 20px;
+  padding: 24px 20px 40px;
+  text-align: center;
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+.site-footer p { max-width: 70ch; margin: 6px auto; }
+
+/* ---------- Load error ---------- */
+
+.load-error {
+  max-width: 640px;
+  margin: 60px auto;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px 26px 6px 26px;
+  text-align: center;
+}
+
+.load-error code {
+  background: var(--bg);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 800px) {
+  #map { height: 380px; }
+
+  /* Labels move above their controls — at 64px wide they were stealing the row. */
+  .filter-line { flex-direction: column; align-items: stretch; gap: 4px; }
+  .filter-label { width: auto; }
+
+  .segmented { align-self: flex-start; max-width: 100%; }
+  .seg-btn { padding: 6px 12px; font-size: 0.78rem; }
+
+  .results-bar { flex-direction: column; align-items: flex-start; }
+  .remote-shelf { padding: 18px 16px 16px; }
+  .shelf-panel { padding-left: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

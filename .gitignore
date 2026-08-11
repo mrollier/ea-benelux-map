@@ -1,0 +1,22 @@
+# Manually saved source exports used during research (job boards, event apps, LinkedIn).
+# Excluded for two reasons, either of which is sufficient:
+#   1. Privacy — EAGxAmsterdam_Attendees.html contains personal data for ~550 named
+#      individuals who did not consent to having it republished.
+#   2. Size — the folder is ~291 MB of saved pages and their assets.
+# See inbox/SOURCES.md (also unpublished) for what was collected and when.
+inbox/
+
+# Design explorations from the visual-direction phase. Not part of the shipped site.
+designs/
+
+# macOS
+.DS_Store
+
+# Python (the historical dataset build scripts)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Scratch / verification artefacts
+_*.html

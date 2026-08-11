@@ -1,0 +1,36 @@
+# Dataset licence — CC BY 4.0
+
+The organisation dataset in this repository — `ea_belgium_orgs.json` and its
+flattened export `ea_belgium_orgs.csv` — is licensed under the
+
+**Creative Commons Attribution 4.0 International License (CC BY 4.0)**
+<https://creativecommons.org/licenses/by/4.0/>
+
+Copyright (c) 2026 Michiel Rollier.
+
+You are free to share and adapt the dataset for any purpose, including
+commercially, provided you give appropriate credit, link to the licence, and
+indicate whether changes were made.
+
+Suggested attribution:
+
+> EA BeNeLux Landscape Map dataset by Michiel Rollier, CC BY 4.0.
+> https://github.com/mrollier/ea-benelux-map
+
+## What the data is, and is not
+
+Each entry carries a `confidence` field (`high` / `medium` / `low`, shown in the
+app as Verified / Partly verified / Unverified) and a `verify` field naming what
+a human still needs to check. Entries are compiled from public sources; they are
+**not** endorsed or confirmed by the organisations listed unless a source says
+so. If you reuse the data, carry the confidence levels with it rather than
+presenting every row as an established fact.
+
+Corrections from listed organisations are welcome — see the README.
+
+## Third-party data
+
+`data/benelux.geojson` is derived from Natural Earth (1:50m Admin 0 – Countries),
+which is in the **public domain**: <https://www.naturalearthdata.com/about/terms-of-use/>
+Map tiles are served by CARTO from OpenStreetMap data (© OpenStreetMap
+contributors, ODbL) and are not redistributed by this repository.
