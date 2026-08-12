@@ -8,7 +8,7 @@ Audience: students, mid-career professionals, and event attendees of EA chapters
 Language: English only for v1 (NL/FR later).
 
 ## Data
-- **`ea_belgium_orgs.json` is the single source of truth** (dataset v0.6, 187 orgs,
+- **`ea_belgium_orgs.json` is the single source of truth** (dataset v0.7, 193 orgs,
   researched Aug 2026; file name kept for stability). `ea_belgium_orgs.csv` is a flattened
   export for manual editing by volunteers — if edited, changes must be merged back into the
   JSON, then regenerate the CSV with `node tools/regenerate_csv.mjs` (it reuses the app's own
@@ -70,8 +70,10 @@ Language: English only for v1 (NL/FR later).
   not merely a company in an adjacent industry. Set `org_type: "company"`; the UI badges it so
   newcomers don't read a for-profit as a charity. Being for-profit is not itself grounds for
   exclusion or for a lower tier.
-- Luxembourg has exactly one entry (`uni-luxembourg-snt`, added v0.5). v0.4's "verified absence"
-  finding is superseded — it was correct for the sources it used, not as a general claim.
+- Luxembourg has exactly one entry (`uni-luxembourg-snt`, added v0.5). The v0.7 research
+  round re-swept Luxembourg in French, German and Luxembourgish and francophone Belgium in
+  French: both absences are real, not search gaps (EA Belgium itself lists no francophone
+  group and solicits founders). Do not "fix" these gaps by lowering the bar.
 - Coordinates are approximate (city-level). Refine only if a verified address exists.
 - Do not present low-confidence facts as certain in the UI; surface `confidence` and link
   to `website`/`careers_url` rather than asserting hiring status.
@@ -134,28 +136,30 @@ Language: English only for v1 (NL/FR later).
 - Linked from eabelgium.org; used at the next EA Summit Brussels org fair
 
 ## Verification backlog (priority order)
-Pruned in the v0.6 cleanup — the removed entries and the resolved allai/carbon-gap tier
-questions are gone; see RESEARCH_LOG v0.6.
-1. **Duplicate**: `ai-safety-amsterdam` vs a possible SAIN Amsterdam chapter — merge or
-   clear the warning in its `verify`.
-2. **Watchlist re-adds** (genuine EA orgs dropped for unconfirmable websites — context in
-   RESEARCH_LOG): Good Impressions, AI Alignment Foundation (try Wayback/WHOIS), ENAIS
-   (NL registration?), Timaeus + AI Standards Lab (NL office by now?), Law for AI Safety +
-   Animal Litigation Network (website yet?).
-3. **Placeholder pins / identity gaps**: the-mission-motor (base city), the-protein-project
-   (city + the two unnamed funders — tier-2 restoration hinges on them), dnais (city, legal
-   form), cellular-agriculture-nl (office city), safe-ai-netherlands (legal form, founders),
-   geefrevolutie (grant amount seen only in a snippet), existential-risk-observatory
-   (team/funders — site blocks fetches), pise-rotterdam (registration),
-   varkens-in-nood (founding year 1997-99 discrepancy), wur-animal-welfare (chair group).
-4. **Status checks**: ea-nijmegen (site 404s), consultants-for-impact (unfinished site),
-   training-for-good, effective-thesis, hli, doneer-effectief (careers 404);
-   ai-safety-camp (Diemen entity ⇒ tier 4→1), syntony (Brussels entity ⇒ tier 4→3),
-   pour-demain (Brussels office).
-5. **Exception-list burn-down**: `tools/validate.mjs` carries ~56 ids excused from the
-   verify+source rule (legacy imports). Every research pass should shrink that list —
-   it prints the count on every run.
-6. Email summit@eabrussels.org for their org-fair list (best unexploited source).
+Rebuilt after the v0.7 research round — see RESEARCH_LOG v0.6 (cleanup) and v0.7
+(research round) for everything resolved.
+1. **Identity gaps still open**: the-protein-project (the two unnamed funders — tier-2
+   restoration hinges on them; legal entity), dnais (city, legal form — nothing public),
+   cellular-agriculture-nl (office city), safe-ai-netherlands (legal form, founders),
+   pise-rotterdam (registration), wur-animal-welfare (chair group),
+   animal-litigation-network (KVK/RSIN + claimed ANBI status),
+   ai-alignment-foundation (identity vs the original sighting; named officers),
+   the-mission-motor + varkens-in-nood (confirm addresses via a KVK extract).
+2. **Status checks**: ea-nijmegen (site 404s), consultants-for-impact (unfinished site),
+   doneer-effectief (careers 404); gain-netherlands (Utrecht office still staffed?).
+3. **Watchlist** (re-check occasionally; none currently qualifies): ENAIS (no legal
+   entity anywhere), Resolution (Timaeus + UK AISI alignment team merged June 2026 —
+   future tier-4 candidate), AI Standards Lab (virtual US non-profit, co-lead in
+   Eindhoven), Law for AI Safety (Brussels LinkedIn only, no KBO entity),
+   Nederlandse Malaria Stichting (MalariaWorld — not AMF's arm despite the domain),
+   Cercle Antispéciste ULB (no effectiveness framing), Sciensano SBB (re-add case if
+   BE/NL biosecurity symmetry is ever wanted), Trustworthy AI Luxembourg (meetup only).
+4. **Exception-list burn-down**: `tools/validate.mjs` excuses ~53 legacy ids from the
+   verify+source rule. Every research pass should shrink that list — it prints the
+   count on every run.
+5. Email summit@eabrussels.org for their org-fair list (best unexploited source).
+6. One manual scan of GiveWell's full Airtable grants database for BeNeLux grantees
+   (the fetchable pages showed none; the Airtable could not be enumerated by tooling).
 7. Tier-4 EU-remote hiring re-checks (policies change yearly); `key_people`/founding gaps. fields
 
 ## Conventions

@@ -8,8 +8,8 @@ EA-funded organisations, cause-adjacent NGOs and think tanks, plus remote EA emp
 with no BeNeLux office.
 
 Built for people new to EA who want to see the landscape before deciding where to look
-harder. **187 organisations** as of dataset v0.6 — 92 in the BeNeLux (45 Belgium ·
-46 Netherlands · 1 Luxembourg), 95 remote.
+harder. **193 organisations** as of dataset v0.7 — 95 in the BeNeLux (46 Belgium ·
+48 Netherlands · 1 Luxembourg), 98 remote.
 
 Plain HTML, CSS and JavaScript. No build step, no framework, no bundler.
 [Leaflet](https://leafletjs.com/) (+ markercluster) via CDN for the map.

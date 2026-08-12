@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "0.6",
-    "research_date": "2026-08-11",
+    "version": "0.7",
+    "research_date": "2026-08-12",
     "scope": "BeNeLux (Belgium, Netherlands, Luxembourg) orgs with explicit EA/Moral Ambition alignment, EA funding, or working on EA cause areas (adjacent); tier 4 = remote, no BeNeLux office",
     "cause_taxonomy": [
       "AI safety & governance",
@@ -13,7 +13,7 @@
       "Careers & talent",
       "Community building"
     ],
-    "notes": "Coordinates are approximate (city-level). All 'verify' fields need manual checks. v0.4 (2026-08-09): scope widened to BeNeLux; per-org 'country' field added (BE/NL/LU, null for tier-4 remote orgs). v0.5 (2026-08-11): expansion driven by manually exported sources in inbox/ (80,000 Hours job board, Probably Good, EAGxAmsterdam 2025 and EA Summit Brussels 2026 exhibitor lists, LinkedIn company search, Goodshift, and the Open Philanthropy / Coefficient Giving grants mirror). Adds Dutch local EA groups, the first Luxembourg entry, for-profit companies (org_type 'company'), and a much wider tier-4 remote set. v0.6 (2026-08-12): quality cleanup — removed 21 weak-fit tier-3 entries, tightened the tier-2 evidence rule (entity-level EA funding or evaluator/talent-org relationship required; a job-board listing alone is tier-3 evidence), re-tiered AI-safety community groups to tier 1, normalised org_type and relationship vocabularies, and demoted unsourced high-confidence entries.",
+    "notes": "Coordinates are approximate (city-level). All 'verify' fields need manual checks. v0.4 (2026-08-09): scope widened to BeNeLux; per-org 'country' field added (BE/NL/LU, null for tier-4 remote orgs). v0.5 (2026-08-11): expansion driven by manually exported sources in inbox/ (80,000 Hours job board, Probably Good, EAGxAmsterdam 2025 and EA Summit Brussels 2026 exhibitor lists, LinkedIn company search, Goodshift, and the Open Philanthropy / Coefficient Giving grants mirror). Adds Dutch local EA groups, the first Luxembourg entry, for-profit companies (org_type 'company'), and a much wider tier-4 remote set. v0.6 (2026-08-12): quality cleanup — removed 21 weak-fit tier-3 entries, tightened the tier-2 evidence rule (entity-level EA funding or evaluator/talent-org relationship required; a job-board listing alone is tier-3 evidence), re-tiered AI-safety community groups to tier 1, normalised org_type and relationship vocabularies, and demoted unsourced high-confidence entries. v0.7 (2026-08-12): targeted research round — merged AI Safety Amsterdam into SAIN Amsterdam (chapter since 2026), removed the defunct Training for Good (site offline since Nov 2025), re-added Good Impressions and the AI Alignment Foundation under their real URLs, added Animal Litigation Network, GAIN Netherlands, Vaccinopolis, VirusBank Platform and Against Malaria Foundation, and verified twelve uncertain entries (Mission Motor now Leiden, Pour Demain's Brussels address confirmed, ERO team/funders recovered via Wayback, Geefrevolutie's $210k grant confirmed at source). Luxembourg and francophone Belgium re-verified as genuine absences in French/German searches.",
     "tier_definitions": {
       "1": "Core EA / Moral Ambition (explicit identity or primarily EA-funded)",
       "2": "EA-funded or EA-endorsed (OP/Coefficient, EA evaluators, EA talent networks) without EA identity",
@@ -26,17 +26,17 @@
       "EU policy (general)"
     ],
     "counts": {
-      "organisations": 187,
+      "organisations": 193,
       "by_tier": {
-        "1": 40,
+        "1": 39,
         "2": 14,
-        "3": 38,
-        "4": 95
+        "3": 42,
+        "4": 98
       },
       "by_country": {
-        "BE": 45,
-        "remote": 95,
-        "NL": 46,
+        "BE": 46,
+        "remote": 98,
+        "NL": 48,
         "LU": 1
       }
     }
@@ -278,7 +278,7 @@
       "website": "https://www.talosnetwork.org",
       "careers_url": "https://www.talosnetwork.org/talos-fellowship",
       "funding": "Open Philanthropy (primary funder at launch)",
-      "description": "Runs Europe's leading AI governance fellowship (~50 fellows/yr): 8-week course, Brussels summit, and paid placements at Brussels-area think tanks (CFG, FLI, TFS, CEPS, EPC, Pour Demain, etc.).",
+      "description": "Runs Europe's leading AI governance fellowship (~50 fellows/yr): 8-week course, Brussels summit, and paid placements at Brussels-area think tanks (CFG, FLI, TFS, CEPS, EPC, Pour Demain, etc.). Spun out of Training for Good, whose site went offline in late 2025.",
       "confidence": "high",
       "verify": "Where legally registered; current leadership names",
       "sources": [
@@ -297,43 +297,6 @@
         {
           "org": "tfs",
           "type": "places_fellows_at"
-        },
-        {
-          "org": "training-for-good",
-          "type": "spun_out_of"
-        }
-      ],
-      "tier": 1,
-      "country": "BE"
-    },
-    {
-      "id": "training-for-good",
-      "name": "Training for Good",
-      "aka": "TFG",
-      "city": "Brussels-linked (programmes); registration unverified",
-      "lat": 50.846,
-      "lng": 4.365,
-      "cause_areas": [
-        "Careers & talent",
-        "AI safety & governance"
-      ],
-      "org_type": "talent_program",
-      "founded": 2021,
-      "key_people": "",
-      "website": "https://www.trainingforgood.com",
-      "careers_url": "",
-      "funding": "Open Philanthropy ($461k for EU Tech Policy Fellowship + operating costs); Charity Entrepreneurship incubatee",
-      "description": "EA talent org whose EU Tech Policy Fellowship (Brussels bootcamps/placements) spun out into Talos in 2024; also ran the Tarbell journalism fellowship. Current activity status unclear — may be mostly wound down.",
-      "confidence": "medium",
-      "verify": "Whether still operating; where registered (possibly not Belgium)",
-      "sources": [
-        "https://www.charityentrepreneurship.com/training-for-good",
-        "https://www.goodventures.org/our-portfolio/grants/training-for-good-operating-costs-and-eu-tech-policy-fellowship/"
-      ],
-      "relationships": [
-        {
-          "org": "talos",
-          "type": "spun_off"
         }
       ],
       "tier": 1,
@@ -442,9 +405,9 @@
       "id": "pour-demain",
       "name": "Pour Demain (Brussels office)",
       "aka": "",
-      "city": "Brussels (office of Swiss think tank)",
-      "lat": 50.849,
-      "lng": 4.356,
+      "city": "Brussels",
+      "lat": 50.844,
+      "lng": 4.369,
       "cause_areas": [
         "AI safety & governance",
         "Biosecurity & pandemic preparedness"
@@ -452,14 +415,15 @@
       "org_type": "think_tank",
       "founded": 2020,
       "key_people": "",
-      "website": "https://pourdemain.eu",
+      "website": "https://www.pourdemain.ngo/en",
       "careers_url": "",
       "funding": "Philanthropic",
       "description": "Swiss-origin policy think tank working on AI and biosecurity risk reduction; listed as a Talos placement host in Brussels. Belgian office details unverified this round.",
-      "confidence": "low",
-      "verify": "Whether it has an actual Brussels office/entity; staff; founding year",
+      "confidence": "medium",
+      "verify": "Brussels office address confirmed (Avenue des Arts/Kunstlaan 44, 1040); Belgian legal-entity form and Brussels staff names still unverified; founding year still to confirm",
       "sources": [
-        "https://forum.effectivealtruism.org/posts/CsBGdHTLmxQnbaSap"
+        "https://forum.effectivealtruism.org/posts/CsBGdHTLmxQnbaSap",
+        "https://www.pourdemain.ngo/en"
       ],
       "relationships": [
         {
@@ -768,13 +732,13 @@
       "funding": "",
       "description": "US-EU policy think tank; past host of EU Tech Policy fellows (tech & geopolitics programme).",
       "confidence": "medium",
-      "verify": "Current tech programme presence in Brussels",
+      "verify": "Hosted EU Tech Policy fellows under Training for Good (predecessor of the Talos fellowship; TfG offline since Nov 2025) — confirm any current Brussels tech-programme presence",
       "sources": [
         "https://be.linkedin.com/jobs/view/eu-tech-policy-fellow-at-training-for-good-3257282859"
       ],
       "relationships": [
         {
-          "org": "training-for-good",
+          "org": "talos",
           "type": "hosts_fellows"
         }
       ],
@@ -1468,16 +1432,20 @@
       ],
       "tier": 4,
       "org_type": "talent_program",
-      "founded": null,
-      "key_people": "",
+      "founded": 2018,
+      "key_people": "Remmelt Ellen, Linda Linsefors, Robert Kralisch (organisers)",
       "website": "https://aisafety.camp",
       "careers_url": "",
-      "funding": "",
+      "funding": "Donations via Manifund; Survival and Flourishing Fund matching (2026)",
       "description": "Part-time remote research programme matching aspiring researchers with mentors.",
       "remote_note": "Fully remote programme, global",
       "confidence": "medium",
-      "verify": "LinkedIn lists AI Safety Camp as based in Diemen, North Holland, but the programme's own site presents it as a remote virtual incubator with no stated legal seat. If a Dutch entity is confirmed this becomes a tier-1 NL entry rather than tier 4",
-      "sources": [],
+      "verify": "LinkedIn 'Diemen' location appears to be an organiser's personal base, not a registered entity — no KVK/stichting found (Aug 2026); recheck if a Dutch entity ever surfaces",
+      "sources": [
+        "https://aisafety.camp/organizers",
+        "https://manifund.org/projects/10th-edition-of-ai-safety-camp",
+        "https://forum.effectivealtruism.org/posts/yzBptBogLbN6WmYge/12th-edition-of-ai-safety-camp-fundraiser"
+      ],
       "relationships": [],
       "country": null
     },
@@ -1653,10 +1621,12 @@
       "careers_url": "",
       "funding": "",
       "description": "Helps students pick high-impact research topics (thesis coaching).",
-      "remote_note": "Fully remote/global; org's current operational status to verify",
-      "confidence": "low",
-      "verify": "Whether still active in 2026",
-      "sources": [],
+      "remote_note": "Fully remote/global",
+      "confidence": "medium",
+      "verify": "Active as of Aug 2026 (Fall 2026 accelerator cohort advertised); founding year and team still unfilled",
+      "sources": [
+        "https://effectivethesis.org/"
+      ],
       "relationships": [],
       "country": null
     },
@@ -2202,10 +2172,13 @@
       "careers_url": "",
       "funding": "",
       "description": "Research on wellbeing-based charity evaluation (e.g. StrongMinds analysis) — the main EA mental-health research org.",
-      "remote_note": "Remote; org size/status to verify",
-      "confidence": "medium",
-      "verify": "Current operational status",
-      "sources": [],
+      "remote_note": "Remote; ANBI-registered in NL (RSIN 828292875) since July 2026 — a tax status, not a Dutch office",
+      "confidence": "high",
+      "verify": "No NL office/city claimed despite the ANBI status — recheck if they open one",
+      "sources": [
+        "https://www.happierlivesinstitute.org/",
+        "https://www.happierlivesinstitute.org/2026/07/13/hli-is-now-a-registered-anbi-in-the-netherlands/"
+      ],
       "relationships": [],
       "country": null
     },
@@ -2284,14 +2257,15 @@
       "org_type": "community",
       "founded": 2022,
       "key_people": "Jochem Wieringa (chair), Pepijn Vloemans (secretary), Jeroen Brouwers (treasurer)",
-      "funding": "Coefficient Giving effective-giving RFP grant ($210,000, seen via search snippet — verify); ANBI-registered, volunteer-run",
+      "funding": "Open Philanthropy (now Coefficient Giving) grant of $210,000 (announced 21 June 2025; funded two full-time hires); ANBI-registered, volunteer-run",
       "description": "Dutch community of effective givers (members pledge ~10% of income to effective charities), founded 2022 as the Tien Procent Club and renamed De Geefrevolutie in July 2026; pledge meetups, workshops and webinars across the Netherlands.",
       "confidence": "high",
-      "verify": "Coefficient grant amount seen only in a search snippet; founding year from secondary source; verify via KvK/ANBI register",
+      "verify": "Founding year from secondary source — confirm via KvK/ANBI register",
       "sources": [
         "https://www.geefrevolutie.nl/",
         "https://tienprocent.substack.com/p/de-tien-procent-club-verandert-van",
-        "https://coefficientgiving.org/research/reflecting-on-our-recent-effective-giving-rfp/"
+        "https://coefficientgiving.org/research/reflecting-on-our-recent-effective-giving-rfp/",
+        "https://tienprocent.substack.com/p/we-hebben-een-open-philantrophy-grant"
       ],
       "relationships": [
         {
@@ -2418,15 +2392,17 @@
       ],
       "org_type": "think_tank",
       "founded": 2021,
-      "key_people": "Otto Barten (founder & director)",
-      "funding": "Initially founder-funded; seeking philanthropic grants (current funders not publicly verified)",
+      "key_people": "Otto Barten (founder & director); Nik Samoylov (senior campaigner; Campaign for AI Safety, merged in 2024); Joep Sauren (treasurer); Marko van der Wal (secretary); researchers Hugo Save, Raymond Koopmanschap, Soumya Sankar; Sue Anne Wong (policy)",
+      "funding": "Long-Term Future Fund (EA Funds) grant plus a major individual donation (announced Jan 2024); initially founder-funded",
       "description": "Amsterdam foundation working to reduce human extinction risk by informing the public debate: mainstream-media outreach, conferences and policy work, including the Conditional AI Safety Treaty proposal (TIME, Nov 2024; paper Mar 2025).",
       "confidence": "high",
-      "verify": "Site blocks automated fetches — confirm current team, funders and vacancies directly",
+      "verify": "Team/funders taken from Wayback snapshots (home 2026-06-04, donations post 2024-01-31) — the site blocks live fetches; recheck for newer funders",
       "sources": [
         "https://www.existentialriskobservatory.org",
         "https://forum.effectivealtruism.org/posts/kK9WfSr52hwqhHXHp/introducing-the-existential-risk-observatory",
-        "https://time.com/7171432/conditional-ai-safety-treaty-trump/"
+        "https://time.com/7171432/conditional-ai-safety-treaty-trump/",
+        "http://web.archive.org/web/20260604232734/https://www.existentialriskobservatory.org/",
+        "http://web.archive.org/web/20240131162220/https://www.existentialriskobservatory.org/nl/geencategorie/nieuwe-donaties-aan-existential-risk-observatory/"
       ],
       "relationships": [],
       "tier": 1,
@@ -2494,8 +2470,8 @@
           "type": "has_chapter"
         },
         {
-          "org": "ai-safety-amsterdam",
-          "type": "same_ecosystem"
+          "org": "sain-amsterdam",
+          "type": "has_chapter"
         }
       ],
       "tier": 1,
@@ -2516,11 +2492,11 @@
       ],
       "org_type": "community",
       "founded": null,
-      "key_people": "Organisers not named on site",
+      "key_people": "Gergő Gáspár (ENAIS co-director; listed at DNAIS on LinkedIn); other organisers not named",
       "funding": "Not disclosed",
       "description": "Professional network for frontier AI safety and governance in the Netherlands; membership requires paid work in the field. Runs a members' community, themed meetups and open events, partnering with Safe AI Netherlands on upskilling. Details are from its own site and unverified.",
       "confidence": "low",
-      "verify": "Base city (map pin is a placeholder at Amsterdam), founding date, organisers, legal form — all unverified",
+      "verify": "Base city (map pin is a placeholder at Amsterdam), legal form and founding date not published anywhere found (site, directories, LinkedIn — Aug 2026); run in collaboration with ENAIS per aisafety.com — ask organisers directly",
       "sources": [
         "https://www.dnais.co/",
         "https://aisafety.com/communities"
@@ -2531,9 +2507,9 @@
       "careers_url": ""
     },
     {
-      "id": "ai-safety-amsterdam",
-      "name": "AI Safety Amsterdam",
-      "aka": "AISA",
+      "id": "sain-amsterdam",
+      "name": "SAIN Amsterdam",
+      "aka": "AISA (AI Safety Amsterdam, until 2026)",
       "city": "Amsterdam (University of Amsterdam)",
       "lat": 52.355,
       "lng": 4.955,
@@ -2544,23 +2520,24 @@
       ],
       "org_type": "community",
       "founded": null,
-      "key_people": "Andreea Ioana Chivu & Ana Paula Castillo (co-directors), Patrik Bartak (advisor)",
-      "funding": "Supported by ELLIS Unit Amsterdam; other funding not disclosed",
-      "description": "Amsterdam community of students, researchers and professionals working to reduce catastrophic AI risks, affiliated with the University of Amsterdam; runs Technical AI Safety Fundamentals and AI Governance courses, hackathons and research projects.",
+      "key_people": "Ana Paula Castillo Rodriguez & Andreea Ioana Chivu (co-directors), Patrik Bartak (advisor, per legacy AISA site)",
+      "funding": "Supported by ELLIS Unit Amsterdam (per legacy AISA site); other funding not disclosed",
+      "description": "Amsterdam chapter of Safe AI Netherlands, formerly AI Safety Amsterdam (AISA), affiliated with the University of Amsterdam and supported by the ELLIS Unit Amsterdam. Community of students, researchers and professionals across UvA, VU Amsterdam and the Amsterdam tech ecosystem; runs BlueDot Technical AI Safety and Frontier AI Governance courses (70+ participants), weekly discussion groups, hackathons and research projects.",
       "confidence": "high",
-      "verify": "Safe AI Netherlands lists an Amsterdam chapter and LinkedIn shows a separate 'SAIN Amsterdam' page, while aisafetyamsterdam.org still presents AISA as itself — establish whether AISA has become the SAIN Amsterdam chapter, and merge these entries if so",
+      "verify": "Founding year as AISA; whether aisafetyamsterdam.org (still presenting AISA as standalone) will redirect or be retired",
       "sources": [
+        "https://safeainetherlands.org/chapters/amsterdam",
         "https://aisafetyamsterdam.org/about/",
         "https://aisafety.com/communities"
       ],
       "relationships": [
         {
           "org": "safe-ai-netherlands",
-          "type": "same_ecosystem"
+          "type": "chapter_of"
         }
       ],
       "tier": 1,
-      "website": "https://aisafetyamsterdam.org",
+      "website": "https://safeainetherlands.org/chapters/amsterdam",
       "careers_url": ""
     },
     {
@@ -2698,14 +2675,15 @@
       ],
       "org_type": "ngo",
       "founded": 1997,
-      "key_people": "Frederieke Schouten (director since 2020, former intensive-livestock veterinarian)",
+      "key_people": "Frederieke Schouten (director since 2020, former intensive-livestock veterinarian); founded by J.J. Voskuil and Hans Baaij",
       "funding": "Donor- and foundation-funded, no government subsidy; CBF-certified",
       "description": "Single-species organisation founded during the 1997-98 swine-fever crisis to end the suffering of pigs in intensive farming — exposés, lawsuits (incl. the EU 'Varkens in Nood' access-to-justice ruling) and policy advocacy; ACE considered-charities shortlist 2021.",
       "confidence": "high",
-      "verify": "Founding year (sources vary 1997-1999); city inferred from sister-org co-location",
+      "verify": "Founding year 1997 confirmed (own FAQ + Wikipedia NL); city inferred from sister-org co-location — confirm address via KVK",
       "sources": [
         "https://www.varkensinnood.nl/over-varkens-in-nood",
-        "https://animalcharityevaluators.org/charity-reviews/evaluating-charities/process-archive/2021-evaluation-process/considered-charities/"
+        "https://animalcharityevaluators.org/charity-reviews/evaluating-charities/process-archive/2021-evaluation-process/considered-charities/",
+        "https://www.varkensinnood.nl/faq"
       ],
       "relationships": [
         {
@@ -3327,26 +3305,27 @@
       "id": "the-mission-motor",
       "name": "The Mission Motor",
       "aka": "Stichting The Mission Motor (RSIN 864226597)",
-      "city": "Amsterdam",
-      "lat": 52.3676,
-      "lng": 4.9041,
+      "city": "Leiden",
+      "lat": 52.16,
+      "lng": 4.497,
       "country": "NL",
       "cause_areas": [
         "Animal welfare & food systems"
       ],
       "tier": 1,
       "org_type": "ngo",
-      "founded": null,
+      "founded": 2022,
       "key_people": "Nicoll Peracha (Executive Director); Lauren Mee (board chair)",
       "website": "https://themissionmotor.org/",
       "careers_url": "",
       "funding": "EA Animal Welfare Fund, Charity Entrepreneurship, Hive, Effektiv Spenden, Craigslist Charitable Fund",
       "description": "Dutch foundation that trains and supports animal-advocacy organisations in monitoring, evaluation and learning (MEL), helping them collect and use data to increase their impact. Works with groups campaigning to end intensive animal farming and reduce wild animal suffering.",
-      "confidence": "low",
-      "verify": "BASE CITY UNCONFIRMED — the Amsterdam pin is a placeholder; the site gives an RSIN but no address. Also confirm founding year",
+      "confidence": "medium",
+      "verify": "Registered seat Vollersgracht 2F, 2312 VL Leiden per KVK-derived aggregator (Oozo, Aug 2026); earlier registration was in Maassluis and the ED works from Drenthe — confirm current address via a KVK extract",
       "sources": [
         "https://themissionmotor.org/",
-        "https://themissionmotor.org/about-us/"
+        "https://themissionmotor.org/about-us/",
+        "https://www.oozo.nl/bedrijven/maassluis/dijkpolder/vertobuurt/2708048/stichting-the-mission-motor"
       ],
       "relationships": []
     },
@@ -3490,11 +3469,12 @@
       "careers_url": "",
       "funding": "Two large philanthropic foundations (not publicly named)",
       "description": "European advocacy initiative working on protein diversification policy — convening farmers, food companies, civil society, policymakers and researchers, and creating neutral forums on the future of protein in the European Parliament and Council. Exhibited at EA Summit Brussels 2026. Says it is funded by two large philanthropic foundations it does not name.",
-      "confidence": "low",
-      "verify": "CITY UNCONFIRMED — the Brussels pin is inferred from its EU-institution focus and EA Summit Brussels presence, not a published address. Also identify the two funders and the legal entity",
+      "confidence": "medium",
+      "verify": "Funders still unnamed ('two large philanthropic foundations… more information coming soon', about page Aug 2026) — tier-2 restoration blocked until they are; both co-founders have School for Moral Ambition backgrounds (Vandamme ex-staff, Martens Food Transition Fellow); legal entity unidentified. Brussels corroborated via co-founder LinkedIn, not a published address",
       "sources": [
         "https://www.theproteinproject.eu/",
-        "https://www.theproteinproject.eu/about"
+        "https://www.theproteinproject.eu/about",
+        "https://www.linkedin.com/in/marin-vandamme/"
       ],
       "relationships": []
     },
@@ -3572,12 +3552,13 @@
       "website": "https://www.rivm.nl/en",
       "careers_url": "https://www.werkenvoornederland.nl/vacatures?query=RIVM",
       "funding": "",
-      "description": "The Dutch national public health institute. Runs infectious-disease surveillance, outbreak response and the national virology programme, and advises government on pandemic preparedness. Its roles appear on the Probably Good job board under biosecurity.",
+      "description": "The Dutch national public health institute. Runs infectious-disease surveillance, outbreak response and the national virology programme, and advises government on pandemic preparedness. Its roles appear on the Probably Good job board under biosecurity. Its Bureau Biosecurity is the national biosecurity knowledge and advice point.",
       "confidence": "medium",
-      "verify": "Which unit is the right contact point for people interested in pandemic preparedness careers",
+      "verify": "Bureau Biosecurity identified as the biosecurity unit and careers entry point (Aug 2026); confirm how pandemic-preparedness vacancies are routed",
       "sources": [
         "https://www.rivm.nl/en",
-        "inbox/Probably Good_JobBoardBeNeLux.html"
+        "inbox/Probably Good_JobBoardBeNeLux.html",
+        "https://www.bureaubiosecurity.nl/en"
       ],
       "relationships": []
     },
@@ -5395,14 +5376,209 @@
       "careers_url": "",
       "funding": "",
       "description": "Self-described AI evaluation and assurance company: red-teams AI systems, turns findings into governance recommendations, then re-tests. Works with AI developers, deploying companies, governments and research institutions.",
-      "remote_note": "No confirmed BeNeLux office. The 80,000 Hours export lists Brussels among the possible work locations for its CTO role alongside Durham NC, London, Singapore and the SF Bay Area. Kept as remote rather than given a Brussels pin because the office is unverified.",
+      "remote_note": "HQ Durham, NC (founder Nathan Heath). Brussels appears on its CTO job page only as a planned future hub alongside SF, DC, London and Singapore — no current office or Belgian entity found (Aug 2026)",
       "confidence": "low",
-      "verify": "Whether Syntony actually has a Brussels presence — if confirmed, this becomes a tier-3 Belgian entry",
+      "verify": "Recheck for an actual Brussels office/KBO entity if hiring materialises there",
       "sources": [
         "https://www.syntonyresearch.ai/",
-        "inbox/Job board _ 80,000 Hours_REMOTE.html"
+        "https://www.syntonyresearch.ai/work/cto/"
       ],
       "relationships": []
+    },
+    {
+      "id": "animal-litigation-network",
+      "name": "Animal Litigation Network",
+      "aka": "",
+      "city": "Amsterdam",
+      "lat": 52.3672,
+      "lng": 4.8837,
+      "cause_areas": [
+        "Animal welfare & food systems"
+      ],
+      "tier": 3,
+      "org_type": "ngo",
+      "founded": 2026,
+      "key_people": "Ellen Greve (founder & chair); board: Mariette Frie, Julian van Bruggen, Leon Ripmeester, Eva Bernet Kempers, Tim van Alten",
+      "website": "https://www.animallitigationnetwork.org",
+      "careers_url": "",
+      "funding": "Not disclosed",
+      "description": "Amsterdam-based stichting (founded 2026) that strengthens enforcement of animal protection laws, pursues strategic litigation and builds legal capacity across European jurisdictions. Governed by an unpaid board of lawyers, legal and policy experts, and enforcement specialists.",
+      "confidence": "medium",
+      "verify": "KVK number/RSIN and the ANBI status claimed on the site are not published or independently verified; funders unknown — any EA funding would justify tier 2",
+      "sources": [
+        "https://www.animallitigationnetwork.org",
+        "https://www.linkedin.com/company/animal-litigation-network"
+      ],
+      "relationships": [],
+      "country": "NL"
+    },
+    {
+      "id": "gain-netherlands",
+      "name": "GAIN Netherlands",
+      "aka": "Global Alliance for Improved Nutrition (Utrecht office)",
+      "city": "Utrecht",
+      "lat": 52.0907,
+      "lng": 5.1214,
+      "cause_areas": [
+        "Global health & development"
+      ],
+      "tier": 3,
+      "org_type": "ngo",
+      "founded": null,
+      "key_people": "",
+      "website": "https://www.gainhealth.org/countries/netherlands",
+      "careers_url": "",
+      "funding": "Government and foundation grants (Geneva-headquartered parent)",
+      "description": "Utrecht representative office of the Global Alliance for Improved Nutrition (GAIN), a Geneva-headquartered nonprofit working on food fortification and access to nutritious food in countries with high malnutrition. GAIN's universal salt iodization programme was a GiveWell standout charity until that designation was retired in 2021.",
+      "confidence": "medium",
+      "verify": "Utrecht office still open/staffed; whether any current GiveWell or TLYCS relationship exists (TLYCS announced it was concluding its recommendation) — the evaluator link is historical, which is why this is tier 3",
+      "sources": [
+        "https://www.gainhealth.org/countries/netherlands",
+        "https://www.thelifeyoucansave.org/best-charities/global-alliance-for-improved-nutrition/",
+        "https://www.givewell.org/charities/GAIN-May-2017-version"
+      ],
+      "relationships": [],
+      "country": "NL"
+    },
+    {
+      "id": "vaccinopolis",
+      "name": "Vaccinopolis",
+      "aka": "UAntwerp human challenge trial facility",
+      "city": "Antwerp (Wilrijk, Drie Eiken campus)",
+      "lat": 51.1683,
+      "lng": 4.3958,
+      "cause_areas": [
+        "Biosecurity & pandemic preparedness"
+      ],
+      "tier": 3,
+      "org_type": "research",
+      "founded": 2022,
+      "key_people": "Pierre Van Damme (director)",
+      "website": "https://www.uantwerpen.be/en/research-groups/vaccinopolis/",
+      "careers_url": "",
+      "funding": "Belgian federal and Flemish government funding; CEPI partnership",
+      "description": "University of Antwerp facility for controlled human infection studies, including a thirty-bed BSL-3 quarantine unit used to accelerate vaccine development against pathogens with epidemic or pandemic potential. Works with CEPI and clinical-trial partners to establish Antwerp as a European hub for human challenge models.",
+      "confidence": "high",
+      "verify": "Current study pipeline beyond the 2025 influenza challenge study; whether roles exist for non-clinical profiles",
+      "sources": [
+        "https://cepi.net/cepi-belgian-universities-partner-enhance-global-pandemic-preparedness/",
+        "https://immunityforhealth.be/all-news/first-controlled-human-infection-study-at-vaccinopolis-in-collaboration-with-nivi-research-center-and-support-from-province-of-antwerp/"
+      ],
+      "relationships": [],
+      "country": "BE"
+    },
+    {
+      "id": "virusbank-platform",
+      "name": "VirusBank Platform",
+      "aka": "KU Leuven VirusBank",
+      "city": "Leuven",
+      "lat": 50.8798,
+      "lng": 4.7005,
+      "cause_areas": [
+        "Biosecurity & pandemic preparedness"
+      ],
+      "tier": 3,
+      "org_type": "research",
+      "founded": 2023,
+      "key_people": "Johan Neyts (Rega Institute)",
+      "website": "https://virusbankplatform.be/",
+      "careers_url": "",
+      "funding": "Belgian federal government (founding grant); CEPI partner",
+      "description": "KU Leuven research platform, funded by the Belgian federal government and opened in 2023, that curates viruses with epidemic or pandemic potential and accelerates development of antivirals, antibodies and vaccines against them. Operates alongside the Rega Institute's high-pathogen infrastructure to prepare for future viral pandemics.",
+      "confidence": "high",
+      "verify": "Funding horizon beyond the founding federal grant; staff scale",
+      "sources": [
+        "https://nieuws.kuleuven.be/en/content/2023/virusbankplatform_enhances_societys_preparedness_against_future_viral_epidemics_and_pandemics",
+        "https://cepi.net/cepi-belgian-universities-partner-enhance-global-pandemic-preparedness/"
+      ],
+      "relationships": [],
+      "country": "BE"
+    },
+    {
+      "id": "good-impressions",
+      "name": "Good Impressions",
+      "aka": "",
+      "city": "Remote-first",
+      "lat": null,
+      "lng": null,
+      "cause_areas": [
+        "Effective giving & meta"
+      ],
+      "tier": 4,
+      "org_type": "social_enterprise",
+      "founded": 2022,
+      "key_people": "Johnstuart Winchell (founder; ex-Google, BCG)",
+      "website": "https://www.goodimpressionsmedia.com",
+      "careers_url": "",
+      "funding": "Grants from Longview Philanthropy and Coefficient Giving, plus client fees",
+      "description": "Nonprofit marketing agency that scales effective nonprofits and foundations with paid ads, SEO and web analytics. Its client base spans AI safety, biosecurity, farmed animal welfare, global health and EA community organisations.",
+      "confidence": "high",
+      "verify": "HQ ambiguity (LinkedIn says Toronto; team pages say SF/NYC); whether it hires BeNeLux-based staff",
+      "sources": [
+        "https://www.goodimpressionsmedia.com",
+        "https://www.linkedin.com/company/good-impressions-media",
+        "https://forum.effectivealtruism.org/posts/AKKe9h3fgBRPucgFJ/runway-till-january-amplify-s-funding-ask-to-market-ea-and-2"
+      ],
+      "relationships": [],
+      "remote_note": "US/Canada-based team serving EA orgs globally; whether it hires in the BeNeLux is unverified",
+      "country": null
+    },
+    {
+      "id": "ai-alignment-foundation",
+      "name": "AI Alignment Foundation",
+      "aka": "Flourishing Future Foundation (legal name, EIN 93-3967552)",
+      "city": "Remote-first",
+      "lat": null,
+      "lng": null,
+      "cause_areas": [
+        "AI safety & governance"
+      ],
+      "tier": 4,
+      "org_type": "research",
+      "founded": 2024,
+      "key_people": "Run in close partnership with AE Studio's alignment team; individual officers not published",
+      "website": "https://www.aialignmentfoundation.org",
+      "careers_url": "",
+      "funding": "Donations; FY2024 revenue $0 per IRS filing",
+      "description": "US 501(c)(3) (legal name Flourishing Future Foundation) that supports neglected approaches to AI alignment with engineering capacity, compute and infrastructure. Runs a fully remote, globally open paid research fellowship in partnership with AE Studio.",
+      "confidence": "medium",
+      "verify": "That this is the same org as the original sighting that listed the parked domain alignmentfoundation.org; named key people; any EA funder relationship",
+      "sources": [
+        "https://www.aialignmentfoundation.org",
+        "https://projects.propublica.org/nonprofits/organizations/933967552",
+        "https://abhijayvuyyuru.substack.com/p/this-ai-fellowship-pays-you-12000"
+      ],
+      "relationships": [],
+      "remote_note": "Fellowship fully remote and open worldwide (morning Pacific-time overlap required); no BeNeLux presence",
+      "country": null
+    },
+    {
+      "id": "amf",
+      "name": "Against Malaria Foundation",
+      "aka": "AMF",
+      "city": "Remote (HQ: London)",
+      "lat": null,
+      "lng": null,
+      "cause_areas": [
+        "Global health & development"
+      ],
+      "tier": 4,
+      "org_type": "ngo",
+      "founded": 2004,
+      "key_people": "Rob Mather (founder & CEO)",
+      "website": "https://www.againstmalaria.com",
+      "careers_url": "",
+      "funding": "Donations; GiveWell top charity and major GiveWell-directed grants",
+      "description": "Funds long-lasting insecticidal bed nets against malaria and is one of GiveWell's longest-standing top charities. It has no BeNeLux office but is a registered charity in both the Netherlands and Belgium, making local donations tax-deductible.",
+      "confidence": "high",
+      "verify": "Exact NL/BE legal entities and deductibility route (direct registration vs Transnational Giving Europe)",
+      "sources": [
+        "https://www.againstmalaria.com/charitystatus.aspx",
+        "https://www.givewell.org/charities/amf"
+      ],
+      "relationships": [],
+      "remote_note": "Small central team, hiring is rare — listed mainly because it is the canonical GiveWell top charity with NL/BE tax-deductible routes",
+      "country": null
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Research log
 
-Two expansions and one cleanup so far, in chronological order. The v0.5 section supersedes
+Two expansions, one cleanup and one targeted research round so far, in chronological order. The v0.5 section supersedes
 several v0.4 decisions (local groups, companies, tier-4 breadth, and the Luxembourg
 "verified absence" finding); the v0.6 section at the bottom is not an expansion but a
 quality pass that removed entries and tightened the tier rules.
@@ -421,3 +421,127 @@ Carried into the CLAUDE.md backlog: the SAIN-Amsterdam duplicate, the watchlist 
 (Good Impressions, AI Alignment Foundation, ENAIS, Timaeus, AI Standards Lab, Law for AI
 Safety, Animal Litigation Network), placeholder pins and identity gaps, status checks,
 and the validator exception-list burn-down.
+
+---
+
+# v0.7 — targeted research round (dataset v0.6 → v0.7)
+
+**Date:** 2026-08-12
+Four bounded research tasks against the v0.6 backlog: resolve the one flagged duplicate,
+chase the watchlist of genuine-but-dropped orgs, search only the four known coverage gaps
+(Luxembourg, francophone Belgium, global health, biosecurity), and verify the
+highest-value uncertain entries. **Result: 187 → 193 organisations** (95 BeNeLux:
+BE 46 · NL 48 · LU 1; 98 remote): +7 added, −1 removed, 1 merged, 12 entries corrected.
+
+## Duplicate resolved: AISA is SAIN Amsterdam
+
+safeainetherlands.org/chapters/amsterdam states "Formerly AISA (AI Safety Amsterdam)" and
+names the same co-directors (Castillo Rodriguez, Chivu) as aisafetyamsterdam.org/about;
+aisafety.com/communities now lists only "SAIN Amsterdam". Merged the AISA entry into
+`sain-amsterdam` (chapter_of → safe-ai-netherlands), keeping the ELLIS detail and history
+in `aka`. The legacy aisafetyamsterdam.org is still live but stale.
+
+## Removed: training-for-good
+
+Effectively defunct — trainingforgood.com has 404'd since Nov 2025 (Wayback CDX: last 200
+on 2025-10-25), Talos spun off in 2024 and the Tarbell Fellowship continues under the
+Tarbell Center. No formal wind-down statement found, but a dead org does not belong on a
+discovery map. Its edges were retargeted: talos keeps the history in its description;
+gmf-brussels's fellowship-host edge now points at talos (successor programme).
+
+## Added (7)
+
+- **good-impressions** (tier 4, high) — real URL found: goodimpressionsmedia.com (the
+  good-impressions.* domains that blocked the v0.5 add belong to unrelated businesses).
+  Site: "grants from Longview Philanthropy and Coefficient Giving"; founder Johnstuart
+  Winchell; the EA Forum calls it "the most established marketing agency in the EA space".
+- **ai-alignment-foundation** (tier 4, medium) — alignmentfoundation.org was a dead end
+  (every Wayback capture 2017–2025 is a GoDaddy parking page; that domain never hosted the
+  org). Real site: aialignmentfoundation.org — 501(c)(3), EIN 93-3967552, legal name
+  "Flourishing Future Foundation" (IRS ruling May 2024), fully remote $12k fellowship run
+  with AE Studio. Identity vs the original sighting left in verify.
+- **animal-litigation-network** (tier 3 NL, medium) — website now live: Amsterdam
+  stichting (Keizersgracht 391a, founded 2026, founder & chair Ellen Greve, unpaid
+  six-person board) doing strategic litigation for animal protection. KVK/ANBI
+  verification outstanding.
+- **gain-netherlands** (tier 3 NL, medium) — GAIN's Utrecht representative office;
+  ex-GiveWell-standout (designation retired 2021), TLYCS recommendation concluded — the
+  evaluator link is historical, hence tier 3 under the tightened rule.
+- **vaccinopolis** (tier 3 BE, high) — UAntwerp's controlled-human-infection facility
+  (thirty-bed BSL-3 quarantine unit, CEPI partner). Real Belgian biosecurity depth beyond
+  the Brussels EU bodies.
+- **virusbank-platform** (tier 3 BE, high) — KU Leuven/Rega pandemic-preparedness
+  platform, Belgian-federal-funded, opened 2023, CEPI partner.
+- **amf** (tier 4, high) — Against Malaria Foundation, an apparent oversight in the v0.5
+  remote set: canonical GiveWell top charity with NL and BE charity registrations
+  (tax-deductible locally), no BeNeLux office.
+
+## Watchlist outcomes (not added)
+
+**Timaeus** is defunct as an independent org — merged into **Resolution** (10 Jun 2026;
+UK AISI alignment team + Timaeus, Berkeley + remote, no NL office) — Resolution
+watchlisted as a future tier-4 candidate. **ENAIS**: enais.co live, NL-based interim
+director and board member, Lightspeed-grant-funded, but no legal entity, address or
+registration anywhere — stays out. **AI Standards Lab**: still a US-incorporated virtual
+lab (fiscal sponsor Players Philanthropy Fund); co-lead personally in Eindhoven; no NL
+entity. **Law for AI Safety**: LinkedIn page grown (Brussels, 3 staff listed) but no
+website and the Belgian CBE/KBO register returns "No result found" — may be
+unincorporated or under another legal name.
+
+## Gap searches: Luxembourg and francophone Belgium are real absences
+
+Luxembourg was re-swept in French, German and Luxembourgish (altruisme efficace /
+effektiver Altruismus / sécurité de l'IA / philanthropie efficace + Lëtzebuerg variants),
+plus EA Forum allGroups, PauseAI communities and the uni.lu club lists: zero qualifying
+orgs. Closest non-qualifiers: European House of AI ASBL (industry association),
+Trustworthy AI Luxembourg (responsible-AI meetup), Fondation de Luxembourg (DAF host,
+surfacing via an individual employee's effective-giving tax guide on the EA Forum).
+Francophone Belgium likewise: EA Belgium's own groups page lists no French-speaking group
+and actively solicits founders; no EA or AI-safety group exists at ULB, ULiège, UNamur or
+UMons; sole candidate Cercle Antispéciste ULB has no effectiveness framing (watchlist).
+Both gaps are real-world absences, not search gaps.
+
+Global health: GiveWell's fetchable grant pages and the still-active GiveWell-managed
+EA Funds GHDF payout reports contain **zero BeNeLux-based grantees or offices** — the
+strongest confirmation yet that BeNeLux global health is thin because the money genuinely
+does not land here. Effective Giving's Amsterdam era is confirmed over (successor Ergo
+Impact is US-incorporated; effectivegiving.org serves a broken certificate). Biosecurity:
+no tier-4 EA biosecurity org (Blueprint, SecureDNA — now a Swiss foundation, Sentinel
+Bio, 1Day Sooner) has a BeNeLux office; Bureau Biosecurity is RIVM's unit and was folded
+into the rivm entry rather than added.
+
+## Verified entries (12 checks)
+
+- **the-mission-motor**: placeholder Amsterdam pin replaced — KVK 87177722 registered at
+  Vollersgracht 2F, Leiden (previously Maassluis), founded Aug 2022; ED works from
+  Drenthe. Confidence low → medium.
+- **the-protein-project**: Brussels corroborated via co-founder Marin Vandamme's
+  LinkedIn; the two funders remain publicly unnamed ("more information coming soon") —
+  tier stays 3. Both co-founders have School for Moral Ambition backgrounds.
+- **dnais**: no public base city/legal form/founding date anywhere; run in collaboration
+  with ENAIS per aisafety.com; Gergő Gáspár (ENAIS co-director) the one publicly linked
+  organiser. Pin stays a placeholder.
+- **ai-safety-camp**: no Dutch legal entity found (site, Manifund, EA Forum fundraiser
+  all silent; donations via Manifund + SFF match) — the LinkedIn "Diemen" reads as an
+  organiser's personal base. Stays tier 4; sources filled; founded 2018.
+- **syntony**: explicit negative — HQ Durham NC; Brussels appears only as a planned
+  growth city on its CTO posting. Stays tier 4.
+- **pour-demain**: Brussels office confirmed at Avenue des Arts/Kunstlaan 44, 1040
+  (site moved to pourdemain.ngo). Confidence low → medium.
+- **effective-thesis**: active (Fall 2026 cohort advertised). Low → medium.
+- **hli**: active (July 2026 posts, April 2026 vacancy) and now ANBI-registered in NL
+  (RSIN 828292875, July 2026) — a tax status, not an office; stays tier 4. Medium → high.
+- **geefrevolutie**: the $210k Open Philanthropy grant confirmed at source — their own
+  newsletter, 21 Jun 2025 (funded two full-time hires). Snippet caveat cleared.
+- **existential-risk-observatory**: team (8 people, incl. Nik Samoylov via the 2024
+  Campaign for AI Safety merger) recovered from a 2026-06-04 Wayback snapshot; funders
+  confirmed as EA Funds' Long-Term Future Fund + a major individual gift (Jan 2024 post).
+- **varkens-in-nood**: founded 1997 per its own FAQ ("in 1997 opgericht door J.J.
+  Voskuil en fiscaal jurist Hans Baaij"), matching Wikipedia NL. Discrepancy closed.
+- **rivm**: Bureau Biosecurity (bureaubiosecurity.nl) identified as the biosecurity
+  unit — answers the entry's open "which unit" question.
+
+Constraint compliance across all four tasks: coefficientgiving.org was never fetched
+(403 policy respected), no credentials or API keys were touched, and nothing was read
+from or attributed to inbox/. Syntony's inbox source citation was replaced with a public
+URL in passing.

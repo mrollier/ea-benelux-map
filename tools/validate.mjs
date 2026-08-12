@@ -23,13 +23,13 @@ const EXCEPTIONS = new Set([
   // empty verify AND no source (tier-4 imports pending per-org checks)
   "donorinfo", "govai", "bluedot", "magnify", "cea", "aim", "givewell",
   "founders-pledge", "ace", "faunalytics", "aac", "shrimp-welfare", "givedirectly",
-  "malaria-consortium", "1day-sooner", "alfed", "owid", "ai-safety-camp", "hli",
+  "malaria-consortium", "1day-sooner", "alfed", "owid",
   "catf-brussels", "ea-brussels",
   // verify present but no http source yet — the verify line names what is missing
   "fari", "hera", "itm", "damiaanactie", "bite-back", "animal-rights-be",
   "hsi-europe", "carbon-gap", "carbon-market-watch", "bellona-europa", "ecf",
   "can-europe", "e3g-brussels", "epoch-ai", "apart-research", "clr", "metaculus",
-  "80000-hours", "successif", "effective-thesis", "tlycs", "wild-animal-initiative",
+  "80000-hours", "successif", "tlycs", "wild-animal-initiative",
   "thl-uk", "sinergia", "iaps", "rethink-priorities", "hip", "gwwc",
   "anima-international", "leep", "eu-ai-office", "gha-brussels", "dsw-brussels",
   "four-paws-eu", "ikea-foundation",
@@ -98,7 +98,7 @@ for (const o of orgs) {
 }
 if (JSON.stringify(counts) !== JSON.stringify(data.meta.counts))
   err(`meta.counts stale: actual ${JSON.stringify(counts)}`);
-if (data.meta.version !== "0.6") err(`meta.version is ${data.meta.version}, expected 0.6`);
+if (data.meta.version !== "0.7") err(`meta.version is ${data.meta.version}, expected 0.7`);
 
 const onException = orgs.filter((o) => EXCEPTIONS.has(o.id)).length;
 console.log(`${orgs.length} orgs · ${errors.length} errors · ${onException} on the exception list`);
