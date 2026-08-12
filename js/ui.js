@@ -46,8 +46,6 @@ export const CAUSE_EXPLAIN = {
     "Working the Brussels policy machine across several EA-relevant files rather than one cause.",
 };
 
-export const causeExplain = (cause) => CAUSE_EXPLAIN[cause] || null;
-
 export const TIER_SHORT = { 1: "Core EA", 2: "EA-funded", 3: "Cause-adjacent", 4: "Remote" };
 
 // Display-layer wording, like CONF_LABEL below: `meta.tier_definitions` in the JSON is a
