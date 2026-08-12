@@ -8,7 +8,8 @@ EA-funded organisations, cause-adjacent NGOs and think tanks, plus remote EA emp
 with no BeNeLux office.
 
 Built for people new to EA who want to see the landscape before deciding where to look
-harder. **208 organisations** as of v0.5 — 113 in the BeNeLux, 95 remote.
+harder. **187 organisations** as of dataset v0.6 — 92 in the BeNeLux (45 Belgium ·
+46 Netherlands · 1 Luxembourg), 95 remote.
 
 Plain HTML, CSS and JavaScript. No build step, no framework, no bundler.
 [Leaflet](https://leafletjs.com/) (+ markercluster) via CDN for the map.
@@ -41,7 +42,8 @@ map, the server is running one directory too high up.
 
 `ea_belgium_orgs.json` is the single source of truth. Edit it and reload — no rebuild
 (the app fetches with `cache: no-store`). `ea_belgium_orgs.csv` is a flattened export for
-volunteers editing in a spreadsheet; merge changes back into the JSON and regenerate it.
+volunteers editing in a spreadsheet; merge changes back into the JSON, then run
+`node tools/regenerate_csv.mjs` (and `node tools/validate.mjs` to check the data rules).
 The site also offers both a filtered and a full CSV download.
 
 - `CLAUDE.md` — data model, tier definitions, the closed cause-area vocabulary, and the

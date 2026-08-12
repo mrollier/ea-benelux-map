@@ -8,20 +8,37 @@ Audience: students, mid-career professionals, and event attendees of EA chapters
 Language: English only for v1 (NL/FR later).
 
 ## Data
-- **`ea_belgium_orgs.json` is the single source of truth** (v0.5, 208 orgs across the BeNeLux,
+- **`ea_belgium_orgs.json` is the single source of truth** (dataset v0.6, 187 orgs,
   researched Aug 2026; file name kept for stability). `ea_belgium_orgs.csv` is a flattened
   export for manual editing by volunteers — if edited, changes must be merged back into the
-  JSON, and the CSV must be regenerated after JSON edits (it now includes a `country` column).
+  JSON, then regenerate the CSV with `node tools/regenerate_csv.mjs` (it reuses the app's own
+  `toCSV`, so the shipped file and the in-app export cannot diverge). After any JSON edit,
+  run `node tools/validate.mjs` — it enforces every structural rule in this file and must
+  print 0 errors before a commit.
+- **Dataset version ≠ site version.** `meta.version` tracks the data (v0.6); the "UI
+  conventions (v0.6)/(v0.7)" headings below and commit messages track the app. They move
+  independently — do not bump one to match the other.
 - Data model: see `meta` in the JSON. Key fields per org: `tier`, `cause_areas`,
   `country` (BE/NL/LU; null for tier 4), `confidence` (high/medium/low), `verify` (what a
   human must check), `remote_note` (tier 4 only), `org_type` (`"company"` is rendered as a
   visible badge), `relationships` (future network view), `sources`.
-- **`cause_areas` is a closed vocabulary**, not free text. The eight valid values are the keys
-  of `CAUSE_COLORS` in `js/ui.js`: AI safety & governance · Biosecurity & pandemic preparedness ·
-  Animal welfare & food systems · Global health & development · Effective giving & meta ·
-  Climate · Careers & talent · Community building. Anything else renders grey and splits the
-  filter chips into near-duplicates. (Three legacy values — EU policy (general), Emerging tech
-  governance, Mental health — predate this rule; don't add more.)
+- **`cause_areas` is a closed vocabulary**, not free text. The canonical eight live in
+  `meta.cause_taxonomy` and match the keys of `CAUSE_COLORS` in `js/ui.js`: AI safety &
+  governance · Biosecurity & pandemic preparedness · Animal welfare & food systems · Global
+  health & development · Effective giving & meta · Climate · Careers & talent · Community
+  building. Three frozen legacy values live in `meta.cause_taxonomy_legacy` (Mental health ·
+  Emerging tech governance · EU policy (general)) — existing holders keep them, new orgs
+  never get them. `tools/validate.mjs` rejects anything outside the union.
+- **`org_type` is a closed vocabulary too** (since v0.6): community · research · think_tank ·
+  ngo · funder_advisor · talent_program · institution · social_enterprise · company. Only
+  `company` changes the UI (a "Company" badge, `orgTypeBadge` in `js/ui.js`) — assign it
+  only when the for-profit status is solid, and update the expected-companies list in
+  `tools/validate.mjs` in the same commit.
+- **`relationships[].type` values** (direction matters, many edges are deliberately
+  one-directional for now): member_of / has_member · has_chapter / chapter_of · hosts /
+  hosted_by · hosts_fellows / places_fellows_at · spun_off / spun_out_of · same_organisation ·
+  sister_org · same_ecosystem · same_network · shared_founder · co_founded ·
+  closely_collaborates · campaign_partner. The validator holds the authoritative list.
 - `inbox/` holds manually saved exports of sources that block automated access (job boards,
   event apps, LinkedIn). It is staging material — the app never reads it. See `inbox/SOURCES.md`.
   **`inbox/` and `designs/` are gitignored and must stay that way**: `inbox/` is ~291 MB and
@@ -29,13 +46,26 @@ Language: English only for v1 (NL/FR later).
 - **Tiers**: 1 = core EA/Moral Ambition · 2 = EA-funded/endorsed, no EA identity ·
   3 = cause-adjacent, BeNeLux presence, no known EA link · 4 = remote EA orgs, NO BeNeLux
   office (`lat`/`lng` are null — never render as map pins; use a side panel/"remote" shelf).
-- Tier conventions applied in the v0.4 expansion: ACE considered-charities shortlist or an
-  EA-evaluator recommendation ⇒ tier 2; explicit-EA university groups ⇒ tier 1 (matches the
-  Belgian group entries); no EA link at all ⇒ tier 3 regardless of quality.
-- Tier conventions added in v0.5: local/university EA groups ⇒ tier 1, both countries, no
-  exceptions; **a globally-remote role on the 80,000 Hours job board is sufficient evidence
-  for tier 4** (that listing *is* the tier-4 criterion); an EA job board listing an org under
-  a core cause area counts as EA endorsement for tier-2 purposes.
+- **Tier conventions (consolidated in the v0.6 cleanup — these supersede v0.4/v0.5):**
+  - Local/university EA groups ⇒ tier 1, no exceptions. **AI-safety community and student
+    groups follow the same rule** (they are the same ecosystem: reading groups, fellowships,
+    hackathons) — this is why safe-ai-netherlands, the SAIN chapters, delft/tilburg-ai-safety
+    and dnais sit at tier 1.
+  - **Tier 2 requires entity-level evidence**: verified EA funding to the listed entity
+    (OP/Coefficient grant, EA Funds, Meta Charity Funders…) or an explicit EA
+    evaluator/talent-org relationship (ACE considered-charities, an evaluator
+    recommendation, Talos/Training-for-Good placement host). **A job-board listing alone
+    (80,000 Hours, Probably Good) is tier-3 evidence, not tier-2** — this is the rule that
+    demoted allai in v0.6, reversing the v0.5 convention.
+  - Funding or a recommendation of an org covers that org's **own offices and fundraising
+    arms** (catf-brussels, one-acre-stichting) but does **not transfer to
+    separately-governed affiliates** (why hsi-europe and ciwf-eu are tier 3).
+  - A globally-remote role on the 80,000 Hours job board remains sufficient evidence for
+    **tier 4** (that listing *is* the tier-4 criterion).
+  - No EA link at all ⇒ tier 3 regardless of quality — and since v0.6 tier 3 also requires
+    **real cause-area substance**: generic development NGOs, careers-only think tanks and
+    industry associations are out, however large (21 such entries were removed; see
+    RESEARCH_LOG). An entry whose own description argues against inclusion is out.
 - **For-profit companies are in scope** (since v0.5) when the EA cause work *is* the product —
   not merely a company in an adjacent industry. Set `org_type: "company"`; the UI badges it so
   newcomers don't read a for-profit as a charity. Being for-profit is not itself grounds for
@@ -83,8 +113,8 @@ Language: English only for v1 (NL/FR later).
   are roughly 2 km between vertices and would visibly miss the real border at street
   level, where a country tint tells you nothing anyway.
 - On screens under 800 px each filter row is a **single horizontally scrollable line**,
-  not a wrapping block. Wrapping 12 cause chips at phone width produced a 529 px sticky
-  bar (65% of the screen); this keeps it near 136 px.
+  not a wrapping block. Wrapping the 12 filter chips (All + 11 causes) at phone width
+  produced a 529 px sticky bar (65% of the screen); this keeps it near 136 px.
 - Long lists collapse: the card grid opens at `CARD_LIMIT` (9) and the remote cause groups
   start closed. Expanded state persists across filter changes on purpose.
 - Filter rows are labelled (Cause / Type / Country) and country uses a **segmented
@@ -104,32 +134,35 @@ Language: English only for v1 (NL/FR later).
 - Linked from eabelgium.org; used at the next EA Summit Brussels org fair
 
 ## Verification backlog (priority order)
-0a. New v0.5 entries needing checks: `the-mission-motor` (base city unpublished — Amsterdam pin
-   is a placeholder), `the-protein-project` (city and the two funders unnamed), `ai-safety-amsterdam`
-   vs a possible SAIN Amsterdam chapter (**potential duplicate — resolve before adding either**),
-   `ai-safety-camp` (LinkedIn says Diemen NL; if a Dutch entity is confirmed it becomes tier 1),
-   `ea-nijmegen` (own site 404s — group may be dormant), `consultants-for-impact` (site reads as
-   an unfinished draft), `norrsken-amsterdam` (may not have opened yet), `allai` (does it have a
-   frontier-AI-risk workstream?), `wur-animal-welfare` (which chair group holds the grants).
-   Also: find real URLs for **Good Impressions** and the **AI Alignment Foundation** — both are
-   genuine EA orgs that had to be dropped because their websites couldn't be confirmed.
-0. New v0.4 (BeNeLux) entries needing checks: dnais (base city + legal form — map pin is a
-   placeholder), cellular-agriculture-nl (office city unpublished — pin is a placeholder),
-   safe-ai-netherlands (legal form, founders), geefrevolutie (Coefficient grant amount seen
-   only in a search snippet), existential-risk-observatory (site blocks fetches — team/funders),
-   delft-ai-safety + tilburg-ai-safety (2025/26 activity), pise-rotterdam (registration),
-   doneer-effectief (careers page 404s), varkens-in-nood (founding year 1997-99 discrepancy)
-1. Low-confidence Belgian entries: give-for-good, carbon-gap, pour-demain (Brussels office?),
-   wap-eu, animal-law-europe, impactful-policy-careers (may not be a standalone org),
-   training-for-good (still active?), clean-air-fund (Brussels office?)
-2. Tier-4 orgs with medium/low confidence on current EU-remote hiring (policies change yearly)
-3. Status checks: effective-thesis, hli (some small EA orgs have wound down)
-4. Email summit@eabrussels.org for their org-fair list (best unexploited source)
-5. Fill `key_people` gaps and founding years marked in `verify` fields
+Pruned in the v0.6 cleanup — the removed entries and the resolved allai/carbon-gap tier
+questions are gone; see RESEARCH_LOG v0.6.
+1. **Duplicate**: `ai-safety-amsterdam` vs a possible SAIN Amsterdam chapter — merge or
+   clear the warning in its `verify`.
+2. **Watchlist re-adds** (genuine EA orgs dropped for unconfirmable websites — context in
+   RESEARCH_LOG): Good Impressions, AI Alignment Foundation (try Wayback/WHOIS), ENAIS
+   (NL registration?), Timaeus + AI Standards Lab (NL office by now?), Law for AI Safety +
+   Animal Litigation Network (website yet?).
+3. **Placeholder pins / identity gaps**: the-mission-motor (base city), the-protein-project
+   (city + the two unnamed funders — tier-2 restoration hinges on them), dnais (city, legal
+   form), cellular-agriculture-nl (office city), safe-ai-netherlands (legal form, founders),
+   geefrevolutie (grant amount seen only in a snippet), existential-risk-observatory
+   (team/funders — site blocks fetches), pise-rotterdam (registration),
+   varkens-in-nood (founding year 1997-99 discrepancy), wur-animal-welfare (chair group).
+4. **Status checks**: ea-nijmegen (site 404s), consultants-for-impact (unfinished site),
+   training-for-good, effective-thesis, hli, doneer-effectief (careers 404);
+   ai-safety-camp (Diemen entity ⇒ tier 4→1), syntony (Brussels entity ⇒ tier 4→3),
+   pour-demain (Brussels office).
+5. **Exception-list burn-down**: `tools/validate.mjs` carries ~56 ids excused from the
+   verify+source rule (legacy imports). Every research pass should shrink that list —
+   it prints the count on every run.
+6. Email summit@eabrussels.org for their org-fair list (best unexploited source).
+7. Tier-4 EU-remote hiring re-checks (policies change yearly); `key_people`/founding gaps. fields
 
 ## Conventions
-- Python build scripts (`build_dataset*.py`) are historical scaffolding from the research
-  phase — do not re-run them (they would overwrite manual edits to the JSON).
+- The historical Python build scaffolding was deleted in v0.6 (it would have overwritten
+  manual edits). The only dataset tooling is `tools/validate.mjs` and
+  `tools/regenerate_csv.mjs` — run both after any JSON edit.
 - New orgs: always include `tier`, `confidence`, `verify`, and at least one source URL.
+  The validator enforces this for every org not on its legacy exception list.
 - ids are stable slugs; `relationships` reference ids — check referential integrity when
   adding/removing orgs.

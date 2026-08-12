@@ -1,7 +1,9 @@
 # Research log
 
-Two expansions so far. The v0.5 section is at the bottom and supersedes several v0.4 decisions
-(local groups, companies, tier-4 breadth, and the Luxembourg "verified absence" finding).
+Two expansions and one cleanup so far, in chronological order. The v0.5 section supersedes
+several v0.4 decisions (local groups, companies, tier-4 breadth, and the Luxembourg
+"verified absence" finding); the v0.6 section at the bottom is not an expansion but a
+quality pass that removed entries and tightened the tier rules.
 
 > **A note on reading this file.** These are working research notes, published so the
 > dataset's provenance is inspectable rather than taken on trust. Where an entry is
@@ -316,3 +318,106 @@ still running (we could not reach their site); whether Consultants for Impact is
 ALLAI's x-risk workstream; the specific WUR
 chair group holding the Coefficient grants; real URLs for Good Impressions and AI Alignment
 Foundation.
+
+---
+
+# v0.6 — cleanup & tier-rule tightening (dataset v0.5 → v0.6)
+
+**Date:** 2026-08-12
+**Not an expansion.** A full audit of the v0.5 dataset against our own inclusion criteria
+("quality over quantity — a newcomer who clicks three irrelevant orgs stops trusting the
+map") found entries that failed them, an inconsistently applied tier-2 rule, and private
+research notes that had leaked into public copy. **Result: 208 → 187 organisations**
+(92 BeNeLux: BE 45 · NL 46 · LU 1; 95 remote). NL now outnumbers BE among mapped orgs.
+
+## Removed (21, all tier 3)
+
+Entries that argued against their own inclusion in user-facing copy:
+- **msf-ocb** — description said "Not EA-aligned … but high interest for your audience".
+- **sciensano** — description said "You flagged doubt about including it … cut if you prefer".
+- **vlesp** — "No EA link"; kept only as the closest Belgian match to EA mental-health
+  interventions. Its removal leaves Mental health with no mapped org — the gap banner
+  now shows that honestly, pointing to the remote org (hli).
+
+Generic development / philanthropy bodies with no cause-specific substance and no EA link:
+- **11-11-11** (umbrella of Flemish North-South orgs), **enabel** (federal development
+  agency), **cordaid** (generic Dutch development NGO), **kbf** (King Baudouin Foundation —
+  fiscal plumbing for transnational giving, not effective giving).
+
+Think tanks and coalitions included only as "career capital", tagged with no real cause:
+- **clingendael**, **egmont-institute** (Careers & talent only), **bruegel** (zero sources,
+  "growing" AI workstream), **epha** (umbrella of public-health NGOs), **ai4belgium**
+  (responsible-AI ethics coalition, not AI safety).
+
+Industry / impact-generic:
+- **solarpower-europe** (solar trade association), **goodshift** (broader "impact" scope
+  than EA), **norrsken-amsterdam** (impact-entrepreneurship hub that may not have opened),
+  **journalismfund-europe** (one farm-animal grant line, possibly one-off).
+
+Existence or identity itself unverified — should not be on a map at all yet:
+- **wap-eu**, **animal-law-europe** (existence of Brussels offices unverified),
+  **give-for-good** (verify field read "EVERYTHING"), **impactful-policy-careers** (no
+  website; possibly not a standalone org), **clean-air-fund** (its only source URL pointed
+  at a different organisation, Clean Air Task Force).
+
+None of the 21 had inbound relationship edges from surviving orgs.
+
+## Tier rule tightened (supersedes the v0.5 job-board rule)
+
+v0.5 said "an EA job board listing an org under a core cause area counts as EA endorsement
+for tier-2 purposes" — but applied it to exactly one org (allai) while 13 tier-3 entries
+with identical evidence stayed at tier 3. v0.6 resolves the contradiction the other way:
+**tier 2 requires entity-level EA funding or an explicit evaluator/talent-org
+relationship; a job-board listing alone is tier-3 evidence** (it remains sufficient for
+tier 4). Parent-org funding does not transfer to separately-governed affiliates, but does
+cover an org's own offices and fundraising arms.
+
+Demoted 2 → 3 under the new rule: **allai** (evidence was the 80k listing), **hsi-europe**
+and **ciwf-eu** (EA funding belongs to the global parents, not the EU entities),
+**carbon-gap** (no verifiable evidence at all), **the-protein-project** (funders unnamed;
+restore to tier 2 if research names an EA funder). Stayed tier 2 on entity-level evidence:
+ceps, epc, pour-demain, gmf-brussels (Talos / Training-for-Good placement hosts — the
+missing gmf edge was added), catf-brussels and one-acre-stichting (own-office rule), plus
+all grant/evaluator-backed entries.
+
+## Re-tiered 2 → 1 (AI-safety community groups follow the EA-groups rule)
+
+effective-environmentalism (legally hosted by EA Netherlands, Meta Charity Funders-funded —
+tier 1 by the literal definition), safe-ai-netherlands, sain-groningen, sain-utrecht,
+ai-safety-amsterdam (duplicate question vs a SAIN Amsterdam chapter stays open in its
+verify field), delft-ai-safety, tilburg-ai-safety (hosted by tier-1 ea-tilburg), dnais
+(professional AI-safety community; confidence stays low).
+
+## Confidence honesty pass
+
+New rule: **high confidence requires at least one source URL** — "Verified" is the label
+a newcomer trusts most. Demoted high → medium (each with a new verify line): hera, itm,
+damiaanactie, carbon-market-watch, bellona-europa, can-europe, 80000-hours. Five orgs had
+low confidence with an empty verify field (nothing said what was unverified): metaculus,
+successif, tlycs, wild-animal-initiative, sinergia — each now names its open checks.
+Assertive descriptions on low-confidence entries were softened (syntony, dnais,
+the-protein-project, cellular-agriculture-nl, consultants-for-impact). Second-person
+research notes were stripped from all surviving public copy (ea-ghent, 80000-hours,
+effective-thesis).
+
+## Structural
+
+Closed `org_type` vocabulary (9 values) — near-duplicates merged (community_group →
+community, research_institute → research, advocacy → ngo, government_agency → institution,
+capacity_builder → ngo) and all 91 tier-4 placeholder values ("", remote_ea_org) replaced
+with real types. Two orgs newly typed `company` on public knowledge: metaculus (public
+benefit corporation) and futuresearch (for-profit startup). Relationship type names
+normalised (member_group → member_of, member_org → has_member, spun_out → spun_off,
+parent_of → has_chapter). Empty `remote_note` keys dropped from non-tier-4 orgs. `meta`
+now declares the canonical 8 causes plus a frozen 3-value legacy list, and carries
+machine-checked `counts`. New tooling: `tools/validate.mjs` (enforces every rule above;
+carries a printed exception list of ~56 legacy entries still lacking verify/sources — to
+be burned down) and `tools/regenerate_csv.mjs`. The unrunnable `build_dataset_v3.py`
+scaffolding was deleted.
+
+## Open items
+
+Carried into the CLAUDE.md backlog: the SAIN-Amsterdam duplicate, the watchlist re-adds
+(Good Impressions, AI Alignment Foundation, ENAIS, Timaeus, AI Standards Lab, Law for AI
+Safety, Animal Litigation Network), placeholder pins and identity gaps, status checks,
+and the validator exception-list burn-down.

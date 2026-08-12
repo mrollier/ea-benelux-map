@@ -35,7 +35,8 @@ function normalize(raw) {
 }
 
 function deriveCauseList(metaObj, allOrgs) {
-  const list = [...(metaObj.cause_taxonomy || [])];
+  // Legacy causes are frozen in meta.cause_taxonomy_legacy; new orgs use the canonical set.
+  const list = [...(metaObj.cause_taxonomy || []), ...(metaObj.cause_taxonomy_legacy || [])];
   const seen = new Set(list);
   allOrgs.forEach((org) =>
     org.cause_areas.forEach((cause) => {

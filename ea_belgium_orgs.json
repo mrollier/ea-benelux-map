@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.5",
+    "version": "0.6",
     "research_date": "2026-08-11",
     "scope": "BeNeLux (Belgium, Netherlands, Luxembourg) orgs with explicit EA/Moral Ambition alignment, EA funding, or working on EA cause areas (adjacent); tier 4 = remote, no BeNeLux office",
     "cause_taxonomy": [
@@ -10,17 +10,35 @@
       "Global health & development",
       "Effective giving & meta",
       "Climate",
-      "Mental health",
       "Careers & talent",
-      "Community building",
-      "Emerging tech governance"
+      "Community building"
     ],
-    "notes": "Coordinates are approximate (city-level). All 'verify' fields need manual checks. v0.4 (2026-08-09): scope widened to BeNeLux; per-org 'country' field added (BE/NL/LU, null for tier-4 remote orgs). v0.5 (2026-08-11): expansion driven by manually exported sources in inbox/ (80,000 Hours job board, Probably Good, EAGxAmsterdam 2025 and EA Summit Brussels 2026 exhibitor lists, LinkedIn company search, Goodshift, and the Open Philanthropy / Coefficient Giving grants mirror). Adds Dutch local EA groups, the first Luxembourg entry, for-profit companies (org_type 'company'), and a much wider tier-4 remote set.",
+    "notes": "Coordinates are approximate (city-level). All 'verify' fields need manual checks. v0.4 (2026-08-09): scope widened to BeNeLux; per-org 'country' field added (BE/NL/LU, null for tier-4 remote orgs). v0.5 (2026-08-11): expansion driven by manually exported sources in inbox/ (80,000 Hours job board, Probably Good, EAGxAmsterdam 2025 and EA Summit Brussels 2026 exhibitor lists, LinkedIn company search, Goodshift, and the Open Philanthropy / Coefficient Giving grants mirror). Adds Dutch local EA groups, the first Luxembourg entry, for-profit companies (org_type 'company'), and a much wider tier-4 remote set. v0.6 (2026-08-12): quality cleanup — removed 21 weak-fit tier-3 entries, tightened the tier-2 evidence rule (entity-level EA funding or evaluator/talent-org relationship required; a job-board listing alone is tier-3 evidence), re-tiered AI-safety community groups to tier 1, normalised org_type and relationship vocabularies, and demoted unsourced high-confidence entries.",
     "tier_definitions": {
       "1": "Core EA / Moral Ambition (explicit identity or primarily EA-funded)",
       "2": "EA-funded or EA-endorsed (OP/Coefficient, EA evaluators, EA talent networks) without EA identity",
       "3": "Cause-adjacent (EA cause areas, BeNeLux presence, no known EA link)",
       "4": "Remote EA orgs: no BeNeLux office, but remote-first EA(-aligned) organisations that plausibly hire people based in the BeNeLux (see remote_note per org for caveats)"
+    },
+    "cause_taxonomy_legacy": [
+      "Mental health",
+      "Emerging tech governance",
+      "EU policy (general)"
+    ],
+    "counts": {
+      "organisations": 187,
+      "by_tier": {
+        "1": 40,
+        "2": 14,
+        "3": 38,
+        "4": 95
+      },
+      "by_country": {
+        "BE": 45,
+        "remote": 95,
+        "NL": 46,
+        "LU": 1
+      }
     }
   },
   "organisations": [
@@ -51,11 +69,11 @@
       "relationships": [
         {
           "org": "ea-ghent",
-          "type": "parent_of"
+          "type": "has_chapter"
         },
         {
           "org": "ea-brussels",
-          "type": "parent_of"
+          "type": "has_chapter"
         },
         {
           "org": "effectief-geven",
@@ -104,13 +122,13 @@
       ],
       "org_type": "community",
       "founded": null,
-      "key_people": "Volunteer organisers (your chapter!)",
+      "key_people": "Volunteer organisers",
       "website": "https://eabelgium.org/groups/",
       "careers_url": "",
       "funding": "Volunteer-run",
       "description": "Local EA group in Ghent with a university chapter at UGent; runs events on AI safety, careers, and other EA causes.",
       "confidence": "high",
-      "verify": "Founding year; fill in your own details",
+      "verify": "Founding year; confirm current organisers and activity",
       "sources": [
         "https://forum.effectivealtruism.org/posts/urGanaeMgXAtfmFpY"
       ],
@@ -203,32 +221,6 @@
         }
       ],
       "tier": 1,
-      "country": "BE"
-    },
-    {
-      "id": "give-for-good",
-      "name": "Give For Good",
-      "aka": "",
-      "city": "Leuven (unverified)",
-      "lat": 50.8798,
-      "lng": 4.7005,
-      "cause_areas": [
-        "Effective giving & meta"
-      ],
-      "org_type": "funder_advisor",
-      "founded": null,
-      "key_people": "",
-      "website": "https://giveforgood.world",
-      "careers_url": "",
-      "funding": "",
-      "description": "Donation platform that invests donations and pays out returns to charities annually; appears in Belgian effective-giving discussions but EA alignment and Belgian registration NOT verified this round.",
-      "confidence": "low",
-      "verify": "EVERYTHING: Belgian registration, city, founders, whether genuinely EA-aligned",
-      "sources": [
-        "https://giveforgood.world"
-      ],
-      "relationships": [],
-      "tier": 3,
       "country": "BE"
     },
     {
@@ -341,37 +333,10 @@
       "relationships": [
         {
           "org": "talos",
-          "type": "spun_out"
+          "type": "spun_off"
         }
       ],
       "tier": 1,
-      "country": "BE"
-    },
-    {
-      "id": "impactful-policy-careers",
-      "name": "Impactful Policy Careers Accelerator",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.848,
-      "lng": 4.358,
-      "cause_areas": [
-        "Careers & talent",
-        "Animal welfare & food systems"
-      ],
-      "org_type": "talent_program",
-      "founded": null,
-      "key_people": "",
-      "website": "",
-      "careers_url": "",
-      "funding": "Fully funded programme (funder unidentified)",
-      "description": "Week-long Brussels training preparing ~20 professionals for EU policy roles driving food systems change (advertised via EA org updates, Nov 2025). Operating organisation NOT identified this round — could be a programme of SMA, ProVeg, or another org rather than a standalone entity.",
-      "confidence": "low",
-      "verify": "Who runs it; whether it is an organisation at all",
-      "sources": [
-        "https://forum.effectivealtruism.org/posts/FfNRgo9bYywNxkKSe"
-      ],
-      "relationships": [],
-      "tier": 3,
       "country": "BE"
     },
     {
@@ -523,7 +488,7 @@
       "funding": "EU budget",
       "description": "Commission body governing AI in Europe, incl. an AI Safety unit enforcing the GPAI rules of the AI Act; featured on the 80,000 Hours job board — the highest-leverage AI-governance employer physically in Brussels.",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm which units hire for safety-relevant roles and current vacancy routes",
       "sources": [
         "https://jobs.80000hours.org/organisations/european-union-ai-office"
       ],
@@ -623,7 +588,7 @@
       "relationships": [
         {
           "org": "ciwf-eu",
-          "type": "member_org"
+          "type": "has_member"
         }
       ],
       "tier": 2,
@@ -657,7 +622,7 @@
           "type": "member_of"
         }
       ],
-      "tier": 2,
+      "tier": 3,
       "country": "BE"
     },
     {
@@ -690,33 +655,6 @@
         }
       ],
       "tier": 1,
-      "country": "BE"
-    },
-    {
-      "id": "goodshift",
-      "name": "Goodshift",
-      "aka": "",
-      "city": "Ghent (Flanders; exact office to verify)",
-      "lat": 51.0543,
-      "lng": 3.7174,
-      "cause_areas": [
-        "Careers & talent"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://goodshift.co",
-      "careers_url": "",
-      "funding": "",
-      "description": "Belgian startup: curated talent network / 'Career Compass' matching impact-driven professionals with mission-driven startups; finalist in Belgian startup awards 'Impact' category. Broader 'impact' scope than EA.",
-      "confidence": "medium",
-      "verify": "Founders, city, whether any EA connection",
-      "sources": [
-        "https://goodshift.co",
-        "https://www.linkedin.com/in/louiscremers/"
-      ],
-      "relationships": [],
       "country": "BE"
     },
     {
@@ -779,31 +717,6 @@
       "country": "BE"
     },
     {
-      "id": "bruegel",
-      "name": "Bruegel",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.842,
-      "lng": 4.362,
-      "cause_areas": [
-        "AI safety & governance",
-        "EU policy (general)"
-      ],
-      "tier": 3,
-      "org_type": "think_tank",
-      "founded": 2005,
-      "key_people": "",
-      "website": "https://www.bruegel.org",
-      "careers_url": "https://www.bruegel.org/vacancies",
-      "funding": "",
-      "description": "Top-ranked EU economics think tank with growing digital/AI policy workstream; frequently cited in AI Act debates.",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
       "id": "epc",
       "name": "European Policy Centre (EPC)",
       "aka": "",
@@ -859,7 +772,12 @@
       "sources": [
         "https://be.linkedin.com/jobs/view/eu-tech-policy-fellow-at-training-for-good-3257282859"
       ],
-      "relationships": [],
+      "relationships": [
+        {
+          "org": "training-for-good",
+          "type": "hosts_fellows"
+        }
+      ],
       "country": "BE"
     },
     {
@@ -913,30 +831,6 @@
       "country": "BE"
     },
     {
-      "id": "ai4belgium",
-      "name": "AI4Belgium",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.85,
-      "lng": 4.355,
-      "cause_areas": [
-        "AI safety & governance"
-      ],
-      "tier": 3,
-      "org_type": "community",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.ai4belgium.be",
-      "careers_url": "",
-      "funding": "",
-      "description": "Belgian federal AI ecosystem coalition (government-linked); ethics & policy working groups.",
-      "confidence": "medium",
-      "verify": "Current activity level",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
       "id": "hera",
       "name": "HERA — EU Health Emergency Preparedness & Response Authority",
       "aka": "",
@@ -954,8 +848,8 @@
       "careers_url": "",
       "funding": "",
       "description": "European Commission authority for health-emergency preparedness (medical countermeasures, threat assessment); the EU's central pandemic-preparedness employer.",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add an independent source URL; confirm hiring routes relevant to non-EU-officials",
       "sources": [],
       "relationships": [],
       "country": "BE"
@@ -980,7 +874,7 @@
       "funding": "",
       "description": "Advocacy NGO (FR/BE) pushing EU policy & funding for global health equity, neglected diseases, pandemic preparedness.",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm Brussels secretariat size and current advocacy focus",
       "sources": [
         "https://www.lobbyfacts.eu/datacard/global-health-advocates"
       ],
@@ -1007,7 +901,7 @@
       "funding": "",
       "description": "German foundation's EU office advocating on global health R&I: neglected tropical diseases, HERA/CEPI support, pandemic preparedness.",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the Brussels office and its global-health advocacy scope",
       "sources": [
         "https://www.dsw.org/en/eu/"
       ],
@@ -1033,32 +927,8 @@
       "careers_url": "https://www.itg.be/en/jobs",
       "funding": "",
       "description": "World-leading tropical-medicine research & training institute; major Belgian employer in global health science.",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "msf-ocb",
-      "name": "Médecins Sans Frontières — Operational Centre Brussels",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.861,
-      "lng": 4.356,
-      "cause_areas": [
-        "Global health & development"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.msf-azg.be",
-      "careers_url": "https://www.msf-azg.be/en/jobs",
-      "funding": "",
-      "description": "One of MSF's five operational centres worldwide sits in Brussels — one of Belgium's largest humanitarian/global-health employers. Not EA-aligned (EA evaluators generally rate other interventions more cost-effective), but high interest for your audience.",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add an independent source URL; confirm current scale of global-health research employment",
       "sources": [],
       "relationships": [],
       "country": "BE"
@@ -1081,105 +951,8 @@
       "careers_url": "",
       "funding": "",
       "description": "Belgian NGO fighting leprosy, TB and other neglected tropical diseases — thematically close to EA global-health priorities (NTDs, TB), though not EA-evaluated.",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "enabel",
-      "name": "Enabel (Belgian development agency)",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.853,
-      "lng": 4.357,
-      "cause_areas": [
-        "Global health & development"
-      ],
-      "tier": 3,
-      "org_type": "institution",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.enabel.be",
-      "careers_url": "https://www.enabel.be/jobs/",
-      "funding": "",
-      "description": "Belgium's federal development agency implementing international cooperation; large employer incl. health programmes.",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "11-11-11",
-      "name": "11.11.11 (Flemish development umbrella)",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.859,
-      "lng": 4.345,
-      "cause_areas": [
-        "Global health & development"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://11.be",
-      "careers_url": "",
-      "funding": "",
-      "description": "Umbrella of Flemish North-South organisations; advocacy + fundraising for development cooperation.",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "sciensano",
-      "name": "Sciensano",
-      "aka": "",
-      "city": "Brussels (Elsene/Ukkel)",
-      "lat": 50.818,
-      "lng": 4.356,
-      "cause_areas": [
-        "Biosecurity & pandemic preparedness"
-      ],
-      "tier": 3,
-      "org_type": "institution",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.sciensano.be",
-      "careers_url": "",
-      "funding": "",
-      "description": "Belgian national public-health institute (epidemic surveillance, One Health). You flagged doubt about including it — kept for completeness as a biosecurity-career employer; cut if you prefer.",
-      "confidence": "high",
-      "verify": "Whether to keep, per your inclusion philosophy",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "epha",
-      "name": "European Public Health Alliance (EPHA)",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.847,
-      "lng": 4.367,
-      "cause_areas": [
-        "Global health & development",
-        "Biosecurity & pandemic preparedness"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://epha.org",
-      "careers_url": "",
-      "funding": "",
-      "description": "Brussels umbrella of public-health NGOs; EU advocacy incl. AMR and disease prevention.",
       "confidence": "medium",
-      "verify": "Relevance depth",
+      "verify": "Add an independent source URL; no effectiveness evaluation known — confirm the cause fit holds",
       "sources": [],
       "relationships": [],
       "country": "BE"
@@ -1235,7 +1008,7 @@
       "funding": "",
       "description": "EU lobbying office of the global animal-welfare org (farm, companion, wild animals).",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm EU-office staffing and the share of farm-animal campaign work",
       "sources": [
         "https://www.four-paws.be/about-us/meet-the-brussels-team"
       ],
@@ -1276,7 +1049,7 @@
       "name": "Animal Rights (BE/NL)",
       "aka": "",
       "city": "Belgium + Netherlands (BE office to verify)",
-      "lat": 51.0,
+      "lat": 51,
       "lng": 4.5,
       "cause_areas": [
         "Animal welfare & food systems"
@@ -1305,7 +1078,7 @@
       "cause_areas": [
         "Animal welfare & food systems"
       ],
-      "tier": 2,
+      "tier": 3,
       "org_type": "ngo",
       "founded": null,
       "key_people": "",
@@ -1322,59 +1095,6 @@
           "type": "member_of"
         }
       ],
-      "country": "BE"
-    },
-    {
-      "id": "wap-eu",
-      "name": "World Animal Protection — EU office",
-      "aka": "",
-      "city": "Brussels (unverified)",
-      "lat": 50.846,
-      "lng": 4.361,
-      "cause_areas": [
-        "Animal welfare & food systems"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.worldanimalprotection.org",
-      "careers_url": "",
-      "funding": "",
-      "description": "EU advocacy presence of the global org; Eurogroup member. NOT verified this round.",
-      "confidence": "low",
-      "verify": "Whether a Brussels office exists",
-      "sources": [],
-      "relationships": [
-        {
-          "org": "eurogroup-animals",
-          "type": "member_of"
-        }
-      ],
-      "country": "BE"
-    },
-    {
-      "id": "animal-law-europe",
-      "name": "Animal Law Europe",
-      "aka": "",
-      "city": "Brussels (unverified)",
-      "lat": 50.8455,
-      "lng": 4.36,
-      "cause_areas": [
-        "Animal welfare & food systems"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.animallaw.eu",
-      "careers_url": "",
-      "funding": "",
-      "description": "Legal-advocacy initiative on EU animal law. Small; NOT verified this round.",
-      "confidence": "low",
-      "verify": "Existence, staff, address",
-      "sources": [],
-      "relationships": [],
       "country": "BE"
     },
     {
@@ -1414,7 +1134,7 @@
       "cause_areas": [
         "Climate"
       ],
-      "tier": 2,
+      "tier": 3,
       "org_type": "think_tank",
       "founded": null,
       "key_people": "",
@@ -1446,8 +1166,8 @@
       "careers_url": "",
       "funding": "",
       "description": "Watchdog on carbon pricing/markets and corporate climate claims.",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add an independent source URL; confirm Brussels registration and staff size",
       "sources": [],
       "relationships": [],
       "country": "BE"
@@ -1470,8 +1190,8 @@
       "careers_url": "",
       "funding": "",
       "description": "Solutions-oriented climate NGO (CCS, industrial decarbonisation); frequent CATF campaign partner.",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add an independent source URL; confirm Brussels office and whether the CATF partnership is current",
       "sources": [],
       "relationships": [
         {
@@ -1523,8 +1243,8 @@
       "careers_url": "",
       "funding": "",
       "description": "Europe's largest climate NGO coalition (190+ members); EU climate policy advocacy.",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add an independent source URL; confirm secretariat size and current campaigns",
       "sources": [],
       "relationships": [],
       "country": "BE"
@@ -1554,57 +1274,6 @@
       "country": "BE"
     },
     {
-      "id": "clean-air-fund",
-      "name": "Clean Air Fund (Brussels presence)",
-      "aka": "",
-      "city": "Brussels (verify)",
-      "lat": 50.847,
-      "lng": 4.365,
-      "cause_areas": [
-        "Climate",
-        "Global health & development"
-      ],
-      "tier": 3,
-      "org_type": "funder_advisor",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.cleanairfund.org",
-      "careers_url": "",
-      "funding": "",
-      "description": "Philanthropic fund on air quality (health + climate co-benefits); advertised Brussels-based roles.",
-      "confidence": "low",
-      "verify": "Whether a formal Brussels office exists",
-      "sources": [
-        "https://jobsin.brussels/organisations/clean-air-task-force/"
-      ],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
-      "id": "kbf",
-      "name": "King Baudouin Foundation",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.85,
-      "lng": 4.366,
-      "cause_areas": [
-        "Effective giving & meta"
-      ],
-      "tier": 3,
-      "org_type": "funder_advisor",
-      "founded": 1976,
-      "key_people": "",
-      "website": "https://kbs-frb.be",
-      "careers_url": "",
-      "funding": "",
-      "description": "Belgium's largest foundation; philanthropy infrastructure (incl. transnational giving vehicles many intl. charities use for Belgian tax-deductible donations — relevant plumbing for effective giving).",
-      "confidence": "high",
-      "verify": "",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
       "id": "donorinfo",
       "name": "Donorinfo",
       "aka": "",
@@ -1629,30 +1298,6 @@
       "country": "BE"
     },
     {
-      "id": "vlesp",
-      "name": "VLESP (Flemish Centre of Expertise in Suicide Prevention)",
-      "aka": "",
-      "city": "Ghent (UGent)",
-      "lat": 51.04,
-      "lng": 3.725,
-      "cause_areas": [
-        "Mental health"
-      ],
-      "tier": 3,
-      "org_type": "research",
-      "founded": null,
-      "key_people": "",
-      "website": "https://www.vlesp.be",
-      "careers_url": "",
-      "funding": "",
-      "description": "UGent-based, government-funded centre for evidence-based suicide prevention — the closest Belgian match to EA's evidence-based mental-health interventions. No EA link.",
-      "confidence": "medium",
-      "verify": "Whether this fits your inclusion bar",
-      "sources": [],
-      "relationships": [],
-      "country": "BE"
-    },
-    {
       "id": "iaps",
       "name": "Institute for AI Policy and Strategy (IAPS)",
       "aka": "",
@@ -1663,7 +1308,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "think_tank",
       "founded": null,
       "key_people": "",
       "website": "https://www.iaps.ai",
@@ -1672,7 +1317,7 @@
       "description": "Nonpartisan think tank on advanced-AI policy (compute policy, frontier security, international strategy); runs an AI Policy Fellowship.",
       "remote_note": "VERIFIED: 'fully remote, able to legally hire in most countries'; salary premium for DC/SF/London",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://www.iaps.ai/careers",
         "https://onthinktanks.org/job/researchers-senior-researchers-artificial-intelligence-ai-policy-and-strategy/"
@@ -1694,7 +1339,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://rethinkpriorities.org",
@@ -1703,7 +1348,7 @@
       "description": "EA think tank researching AI governance, animal welfare (incl. invertebrates), global health, and EA movement questions.",
       "remote_note": "VERIFIED: 100% remote, staff in 15 countries, 'welcomes applicants from anywhere in the world'",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://careers.rethinkpriorities.org/"
       ],
@@ -1721,7 +1366,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://epoch.ai",
@@ -1746,7 +1391,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.governance.ai",
@@ -1771,7 +1416,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://apartresearch.com",
@@ -1797,7 +1442,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://bluedot.org",
@@ -1822,7 +1467,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://aisafety.camp",
@@ -1847,7 +1492,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://longtermrisk.org",
@@ -1873,7 +1518,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "company",
       "founded": null,
       "key_people": "",
       "website": "https://www.metaculus.com",
@@ -1882,7 +1527,7 @@
       "description": "Forecasting platform used across EA for AI/bio/geopolitical predictions.",
       "remote_note": "Remote team; verify EU hiring",
       "confidence": "low",
-      "verify": "",
+      "verify": "Confirm EU-remote hiring and the public-benefit-corporation legal form; add a source URL",
       "sources": [],
       "relationships": [],
       "country": null
@@ -1898,16 +1543,16 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://80000hours.org",
       "careers_url": "https://80000hours.org/about/meet-the-team/#vacancies",
       "funding": "Open Philanthropy a.o.",
-      "description": "The flagship EA careers org: research-driven career guide, job board, podcast, 1:1 advising. Its job board is also your best data source for 'currently hiring' status.",
+      "description": "The flagship EA careers org: research-driven career guide, job board, podcast, 1:1 advising. Its job board is the most reliable public indicator of which EA organisations are currently hiring.",
       "remote_note": "London-based, hybrid; advising/job board fully global; some remote roles",
-      "confidence": "high",
-      "verify": "",
+      "confidence": "medium",
+      "verify": "Add a source URL (org is well known, but the entry carries no citation)",
       "sources": [],
       "relationships": [],
       "country": null
@@ -1923,7 +1568,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.highimpactprofessionals.org",
@@ -1932,7 +1577,7 @@
       "description": "Impact Accelerator Program + Talent Directory for mid/senior professionals transitioning to high-impact work.",
       "remote_note": "Remote org; programmes global and free",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://www.highimpactprofessionals.org/"
       ],
@@ -1951,7 +1596,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.successif.org",
@@ -1960,7 +1605,7 @@
       "description": "Career-transition support for mid/senior professionals moving into AI risk work.",
       "remote_note": "Remote; verify current programmes",
       "confidence": "low",
-      "verify": "",
+      "verify": "Confirm the org is active and hiring EU-remote; add a source URL",
       "sources": [],
       "relationships": [],
       "country": null
@@ -1976,7 +1621,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.magnifymentoring.org",
@@ -2001,13 +1646,13 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://effectivethesis.org",
       "careers_url": "",
       "funding": "",
-      "description": "Helps students pick high-impact research topics (thesis coaching) — directly useful for your student audience.",
+      "description": "Helps students pick high-impact research topics (thesis coaching).",
       "remote_note": "Fully remote/global; org's current operational status to verify",
       "confidence": "low",
       "verify": "Whether still active in 2026",
@@ -2027,7 +1672,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.centreforeffectivealtruism.org",
@@ -2054,7 +1699,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.charityentrepreneurship.com",
@@ -2079,7 +1724,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.givingwhatwecan.org",
@@ -2088,7 +1733,7 @@
       "description": "The 10% Pledge org; effective-giving education and donation platform (Effectief Geven's international sister network hub).",
       "remote_note": "Fully remote, hires internationally",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://www.effectiefgeven.be/ons-ecosysteem"
       ],
@@ -2107,7 +1752,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.givewell.org",
@@ -2133,7 +1778,7 @@
         "Climate"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.founderspledge.com",
@@ -2159,7 +1804,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.thelifeyoucansave.org",
@@ -2168,7 +1813,7 @@
       "description": "Peter Singer-founded effective-giving org.",
       "remote_note": "Remote; small team; verify hiring",
       "confidence": "low",
-      "verify": "",
+      "verify": "Confirm EU-remote hiring and current recommendation methodology; add a source URL",
       "sources": [],
       "relationships": [],
       "country": null
@@ -2191,7 +1836,6 @@
       "careers_url": "",
       "funding": "Coefficient Giving (formerly Open Philanthropy), ASML Foundation, individual donors",
       "description": "Dutch effective-giving platform (ANBI) channelling tax-deductible donations to GiveWell/Founders Pledge/ACE-recommended charities; raised €8M in 2025 (+42%) and ~€24M cumulatively since its 2022 founding. Sister organisation of Effectief Geven (BE) and Effektiv Spenden (DE).",
-      "remote_note": "",
       "confidence": "high",
       "verify": "Careers page 404s — check for vacancies via LinkedIn; confirm cumulative donation totals",
       "sources": [
@@ -2218,7 +1862,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://animainternational.org",
@@ -2227,7 +1871,7 @@
       "description": "Coalition of European farmed-animal orgs; corporate campaigns and investigations.",
       "remote_note": "VERIFIED: advertises roles as 'remote worldwide'",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://forum.effectivealtruism.org/posts/Lsq6fdek6k6FdhxWZ"
       ],
@@ -2246,7 +1890,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://animalcharityevaluators.org",
@@ -2271,7 +1915,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://faunalytics.org",
@@ -2297,7 +1941,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.animaladvocacycareers.org",
@@ -2322,7 +1966,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.shrimpwelfareproject.org",
@@ -2347,7 +1991,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.wildanimalinitiative.org",
@@ -2356,7 +2000,7 @@
       "description": "Research on wild animal welfare.",
       "remote_note": "US-based remote; intl. hiring per role — verify",
       "confidence": "low",
-      "verify": "",
+      "verify": "Confirm EU-remote hiring; add a source URL",
       "sources": [],
       "relationships": [],
       "country": null
@@ -2372,7 +2016,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://thehumaneleague.org.uk",
@@ -2397,7 +2041,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.sinergiaanimal.org",
@@ -2406,7 +2050,7 @@
       "description": "Corporate campaigns in Global South + some European work.",
       "remote_note": "Remote, campaign-country-leaning; verify EU roles",
       "confidence": "low",
-      "verify": "",
+      "verify": "Confirm the European workstream and EU-remote hiring; add a source URL",
       "sources": [],
       "relationships": [],
       "country": null
@@ -2422,7 +2066,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://leadelimination.org",
@@ -2431,7 +2075,7 @@
       "description": "AIM-incubated charity against childhood lead poisoning; a poster child of cost-effective policy advocacy.",
       "remote_note": "Remote-first, distributed team incl. Europe",
       "confidence": "medium",
-      "verify": "",
+      "verify": "Confirm the org still hires globally-remote and has no EU-only or US-only restriction",
       "sources": [
         "https://forum.effectivealtruism.org/posts/aj4PQaLqSMWffyhFD/ea-landscape-in-the-uk"
       ],
@@ -2449,7 +2093,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.givedirectly.org",
@@ -2474,7 +2118,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.malariaconsortium.org",
@@ -2499,7 +2143,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.1daysooner.org",
@@ -2525,7 +2169,7 @@
         "Climate"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://allfed.info",
@@ -2551,7 +2195,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.happierlivesinstitute.org",
@@ -2577,7 +2221,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "remote_ea_org",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://ourworldindata.org",
@@ -2723,7 +2367,7 @@
           "type": "hosted_by"
         }
       ],
-      "tier": 2,
+      "tier": 1,
       "website": "https://effectiveenvironmentalism.org",
       "careers_url": ""
     },
@@ -2753,7 +2397,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ],
       "tier": 1,
@@ -2854,7 +2498,7 @@
           "type": "same_ecosystem"
         }
       ],
-      "tier": 2,
+      "tier": 1,
       "website": "https://safeainetherlands.org",
       "careers_url": ""
     },
@@ -2874,7 +2518,7 @@
       "founded": null,
       "key_people": "Organisers not named on site",
       "funding": "Not disclosed",
-      "description": "Professional network for frontier AI safety and governance in the Netherlands; membership requires paid work in the field. Runs a members' community, themed meetups and open events, partnering with Safe AI Netherlands on upskilling.",
+      "description": "Professional network for frontier AI safety and governance in the Netherlands; membership requires paid work in the field. Runs a members' community, themed meetups and open events, partnering with Safe AI Netherlands on upskilling. Details are from its own site and unverified.",
       "confidence": "low",
       "verify": "Base city (map pin is a placeholder at Amsterdam), founding date, organisers, legal form — all unverified",
       "sources": [
@@ -2882,7 +2526,7 @@
         "https://aisafety.com/communities"
       ],
       "relationships": [],
-      "tier": 2,
+      "tier": 1,
       "website": "https://www.dnais.co",
       "careers_url": ""
     },
@@ -2915,7 +2559,7 @@
           "type": "same_ecosystem"
         }
       ],
-      "tier": 2,
+      "tier": 1,
       "website": "https://aisafetyamsterdam.org",
       "careers_url": ""
     },
@@ -2943,7 +2587,7 @@
         "https://aisafety.com/communities"
       ],
       "relationships": [],
-      "tier": 2,
+      "tier": 1,
       "website": "https://delftaisafety.org",
       "careers_url": ""
     },
@@ -2976,7 +2620,7 @@
           "type": "hosted_by"
         }
       ],
-      "tier": 2,
+      "tier": 1,
       "website": "https://www.eatilburg.nl/ai-safety-initiative",
       "careers_url": ""
     },
@@ -3125,7 +2769,7 @@
       "founded": 2021,
       "key_people": "Maresa Oosterman (chair), Tim van de Rijdt (treasurer); board incl. Ira van Eelen, Rene Wijffels",
       "funding": "Dutch National Growth Fund finances its Growth Plan (reported ~€60M for the national cellular-agriculture ecosystem — figure from press, not the foundation's own pages)",
-      "description": "Foundation building the Dutch cultivated-meat and precision-fermentation ecosystem across education, research, scale-up facilities and innovation, connecting 45+ organisations; executes the National Growth Fund cellular-agriculture programme.",
+      "description": "Foundation building the Dutch cultivated-meat and precision-fermentation ecosystem across education, research, scale-up facilities and innovation, connecting 45+ organisations; selected to execute the National Growth Fund cellular-agriculture programme, per press reports.",
       "confidence": "low",
       "verify": "Office city unpublished (map pin is a placeholder at Amsterdam); €60M figure only in press snippets; no EA funding link (EA Animal Welfare Fund funded analogous CellAg orgs abroad, not this one)",
       "sources": [
@@ -3296,7 +2940,7 @@
       "funding": "Endowed by INGKA Foundation; grants ~€200M/year (~€3bn to date)",
       "description": "Leiden-based philanthropic funder focused on climate-change mitigation and family incomes; a funder of GiveDirectly's refugee cash-transfer programme, though its broader grantmaking is mainstream strategic philanthropy rather than EA-style evaluation.",
       "confidence": "high",
-      "verify": "",
+      "verify": "Confirm the GiveDirectly grant relationship is current",
       "sources": [
         "https://ikeafoundation.org/",
         "https://en.wikipedia.org/wiki/IKEA_Foundation"
@@ -3371,14 +3015,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://eadelft.org/",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Delft University of Technology. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3387,7 +3030,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3404,14 +3047,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.tue.nl/en/our-university/community/effective-altruism-eindhoven",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Eindhoven University of Technology. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person; the group's own domain eaeindhoven.nl returns 404 — this is its TU/e page",
       "sources": [
@@ -3420,7 +3062,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3437,14 +3079,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.eatilburg.nl/",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Tilburg University. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3453,7 +3094,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         },
         {
           "org": "tilburg-ai-safety",
@@ -3474,14 +3115,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.ealeiden.org/",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Leiden University. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3490,7 +3130,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3507,14 +3147,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://linktr.ee/eaamsterdam",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at University of Amsterdam. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3523,7 +3162,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3540,14 +3179,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.thehagueea.org/",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Leiden University College The Hague. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3556,7 +3194,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3573,14 +3211,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://forum.effectivealtruism.org/groups/gsNwQYwQaJcD3aAdF",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Radboud University Nijmegen. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "low",
       "verify": "Own site eanijmegen.nl returned 404 on 2026-08-11 (both root and /about) — group may be dormant. Website field points at its EA Forum group page instead. Confirm the group is still running before promoting it",
       "sources": [
@@ -3589,7 +3226,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3606,14 +3243,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.instagram.com/ea.roosevelt/",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at University College Roosevelt. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3622,7 +3258,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3639,14 +3275,13 @@
         "Careers & talent"
       ],
       "tier": 1,
-      "org_type": "community_group",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://linktr.ee/EAzwolle",
       "careers_url": "",
       "funding": "",
       "description": "Local effective altruism group at Windesheim University of Applied Sciences. Runs introductory fellowships, reading and discussion groups, talks and socials for students and locals exploring high-impact careers and giving. Listed in the EA Netherlands group directory.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Confirm the group is still active in the 2026/27 academic year and name a contact person",
       "sources": [
@@ -3655,7 +3290,7 @@
       "relationships": [
         {
           "org": "ea-netherlands",
-          "type": "member_group"
+          "type": "member_of"
         }
       ]
     },
@@ -3672,14 +3307,13 @@
         "Global health & development"
       ],
       "tier": 1,
-      "org_type": "research_institute",
+      "org_type": "research",
       "founded": null,
       "key_people": "Prof. dr. Paul Smeets (founder and director)",
       "website": "https://www.impactlab.amsterdam/",
       "careers_url": "",
       "funding": "Philanthropic donations via the Amsterdam University Fund (ANBI); NWO Vidi grant; contributions from evaluated charities",
       "description": "Research lab at the University of Amsterdam studying extraordinary charitable impact: it evaluates interventions with the potential to be far more cost-effective than the average charity in their cause area, and studies what actually persuades donors to give to the most effective options. Focused on global health, extreme poverty and gender equality in low-income countries.",
-      "remote_note": "",
       "confidence": "high",
       "verify": "Founding year; whether the lab hires outside standard university vacancy channels",
       "sources": [
@@ -3701,14 +3335,13 @@
         "Animal welfare & food systems"
       ],
       "tier": 1,
-      "org_type": "capacity_builder",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "Nicoll Peracha (Executive Director); Lauren Mee (board chair)",
       "website": "https://themissionmotor.org/",
       "careers_url": "",
       "funding": "EA Animal Welfare Fund, Charity Entrepreneurship, Hive, Effektiv Spenden, Craigslist Charitable Fund",
       "description": "Dutch foundation that trains and supports animal-advocacy organisations in monitoring, evaluation and learning (MEL), helping them collect and use data to increase their impact. Works with groups campaigning to end intensive animal farming and reduce wild animal suffering.",
-      "remote_note": "",
       "confidence": "low",
       "verify": "BASE CITY UNCONFIRMED — the Amsterdam pin is a placeholder; the site gives an RSIN but no address. Also confirm founding year",
       "sources": [
@@ -3736,7 +3369,6 @@
       "careers_url": "https://goal-3.breezy.hr/",
       "funding": "Founders Pledge and community (€260k), Achmea Foundation impact fund, grants",
       "description": "Dutch organisation building IMPALA, a low-cost connected patient-monitoring platform for hospitals in low- and middle-income countries, combining multi-patient monitoring, diagnostics and data intelligence. Structured as a social enterprise plus a foundation (2023) that funds monitors for hospitals that cannot afford them. Received a €260k grant from Founders Pledge and its community.",
-      "remote_note": "",
       "confidence": "high",
       "verify": "Founding year of the social enterprise (the 2023 date is the foundation); current headcount",
       "sources": [
@@ -3757,15 +3389,14 @@
         "AI safety & governance",
         "Community building"
       ],
-      "tier": 2,
-      "org_type": "community_group",
+      "tier": 1,
+      "org_type": "community",
       "founded": 2023,
       "key_people": "",
       "website": "https://safeainetherlands.org/",
       "careers_url": "",
       "funding": "",
       "description": "Groningen chapter of Safe AI Netherlands, and the group SAIN grew out of. Founded in 2023 as the AI Safety Initiative Groningen (AISIG) and rebranded in 2026. Runs AI safety courses, research discussion groups, hackathons and speaker events.",
-      "remote_note": "",
       "confidence": "high",
       "verify": "Current chapter leads; whether the group is university-affiliated",
       "sources": [
@@ -3791,15 +3422,14 @@
         "AI safety & governance",
         "Community building"
       ],
-      "tier": 2,
-      "org_type": "community_group",
+      "tier": 1,
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://safeainetherlands.org/",
       "careers_url": "",
       "funding": "",
       "description": "Utrecht chapter of Safe AI Netherlands. Runs local AI safety courses, events and community building, using the national organisation's shared resources and legal infrastructure.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Founding date, chapter leads, and activity level — the chapter is listed nationally but has little independent web presence",
       "sources": [
@@ -3825,14 +3455,13 @@
         "Animal welfare & food systems"
       ],
       "tier": 2,
-      "org_type": "research_institute",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.wur.nl/en/research-results.htm",
       "careers_url": "https://www.wur.nl/en/vacancies.htm",
       "funding": "Open Philanthropy / Coefficient Giving farm animal welfare programme (~$608k across 2017 and 2021); Dutch government and EU research funding",
       "description": "Animal-science research groups at Wageningen University & Research working on farmed animal welfare and sustainable animal production systems. Received two Open Philanthropy (now Coefficient Giving) farm animal welfare grants totalling roughly $608,000 (2017 and 2021).",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Which specific chair group holds the Coefficient grants, and whether that work is still running in 2026; no stable public URL for the specific animal-welfare chair group was found, so the website points at WUR's research index",
       "sources": [
@@ -3853,15 +3482,14 @@
         "Animal welfare & food systems",
         "Climate"
       ],
-      "tier": 2,
-      "org_type": "advocacy",
+      "tier": 3,
+      "org_type": "ngo",
       "founded": null,
       "key_people": "Marin Vandamme; Katrien Martens",
       "website": "https://www.theproteinproject.eu/",
       "careers_url": "",
       "funding": "Two large philanthropic foundations (not publicly named)",
-      "description": "European advocacy initiative working on protein diversification policy — convening farmers, food companies, civil society, policymakers and researchers, and creating neutral forums on the future of protein in the European Parliament and Council. Exhibited at EA Summit Brussels 2026. Funded by two large philanthropic foundations, not yet publicly named.",
-      "remote_note": "",
+      "description": "European advocacy initiative working on protein diversification policy — convening farmers, food companies, civil society, policymakers and researchers, and creating neutral forums on the future of protein in the European Parliament and Council. Exhibited at EA Summit Brussels 2026. Says it is funded by two large philanthropic foundations it does not name.",
       "confidence": "low",
       "verify": "CITY UNCONFIRMED — the Brussels pin is inferred from its EU-institution focus and EA Summit Brussels presence, not a published address. Also identify the two funders and the legal entity",
       "sources": [
@@ -3881,7 +3509,7 @@
       "cause_areas": [
         "AI safety & governance"
       ],
-      "tier": 2,
+      "tier": 3,
       "org_type": "think_tank",
       "founded": 2018,
       "key_people": "Catelijne Muller (president, co-founder); Virginia Dignum; Aimee van Wynsberghe (co-founders)",
@@ -3889,9 +3517,8 @@
       "careers_url": "https://allai.nl/",
       "funding": "",
       "description": "Independent Dutch organisation promoting responsible development, deployment and use of AI, founded by the three Dutch members of the European Commission's High-Level Expert Group on AI. Works on EU AI policy and the AI Act. Based at Amsterdam Science Park.",
-      "remote_note": "",
       "confidence": "medium",
-      "verify": "Whether ALLAI has a frontier-AI-risk workstream or is purely responsible-AI — v0.4 excluded it on those grounds; it is included now because 80,000 Hours lists its roles under AI safety & policy",
+      "verify": "Whether ALLAI has a frontier-AI-risk workstream or is purely responsible-AI — v0.4 excluded it on those grounds",
       "sources": [
         "https://allai.nl/about-us/",
         "https://www.tudelft.nl/en/2018/tbm/allai-netherlands-officially-launched",
@@ -3911,14 +3538,13 @@
         "AI safety & governance"
       ],
       "tier": 3,
-      "org_type": "research_institute",
+      "org_type": "research",
       "founded": 2009,
       "key_people": "",
       "website": "https://www.uni.lu/snt-en/",
       "careers_url": "https://www.uni.lu/en/about/work/explore-our-jobs/",
       "funding": "",
       "description": "The Interdisciplinary Centre for Security, Reliability and Trust at the University of Luxembourg: 530+ staff across 18 research groups working on cybersecurity, autonomous systems, FinTech and space systems, including machine-learning security testing and AI governance. The first Luxembourg entry in this dataset.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Whether any SnT group works on frontier-AI risk specifically rather than general ML security; the pin is the Belval campus",
       "sources": [
@@ -3940,75 +3566,17 @@
         "Global health & development"
       ],
       "tier": 3,
-      "org_type": "government_agency",
+      "org_type": "institution",
       "founded": 1984,
       "key_people": "",
       "website": "https://www.rivm.nl/en",
       "careers_url": "https://www.werkenvoornederland.nl/vacatures?query=RIVM",
       "funding": "",
       "description": "The Dutch national public health institute. Runs infectious-disease surveillance, outbreak response and the national virology programme, and advises government on pandemic preparedness. Its roles appear on the Probably Good job board under biosecurity.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Which unit is the right contact point for people interested in pandemic preparedness careers",
       "sources": [
         "https://www.rivm.nl/en",
-        "inbox/Probably Good_JobBoardBeNeLux.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "clingendael",
-      "name": "Clingendael Institute",
-      "aka": "Netherlands Institute of International Relations Clingendael",
-      "city": "The Hague",
-      "lat": 52.0705,
-      "lng": 4.3007,
-      "country": "NL",
-      "cause_areas": [
-        "Careers & talent",
-        "Community building"
-      ],
-      "tier": 3,
-      "org_type": "think_tank",
-      "founded": 1983,
-      "key_people": "",
-      "website": "https://www.clingendael.org/",
-      "careers_url": "https://www.clingendael.org/about-us/vacancies",
-      "funding": "",
-      "description": "The Netherlands Institute of International Relations: an independent think tank and academy in The Hague researching international security, geopolitics and EU affairs. A common career-capital step for people aiming at international policy work; its internships appear on the Probably Good job board.",
-      "remote_note": "",
-      "confidence": "medium",
-      "verify": "No known EA link — included as cause-adjacent career capital; confirm that framing still fits",
-      "sources": [
-        "https://www.clingendael.org/",
-        "inbox/Probably Good_JobBoardBeNeLux.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "cordaid",
-      "name": "Cordaid",
-      "aka": "",
-      "city": "The Hague",
-      "lat": 52.0705,
-      "lng": 4.3007,
-      "country": "NL",
-      "cause_areas": [
-        "Global health & development"
-      ],
-      "tier": 3,
-      "org_type": "ngo",
-      "founded": 1914,
-      "key_people": "",
-      "website": "https://www.cordaid.org/en/",
-      "careers_url": "",
-      "funding": "",
-      "description": "Large Dutch development organisation working on health systems, humanitarian aid and resilience in fragile and conflict-affected countries. Roles appear on the Probably Good job board under global health and development.",
-      "remote_note": "",
-      "confidence": "medium",
-      "verify": "No known EA link or effectiveness-evaluation record — included as cause-adjacent",
-      "sources": [
-        "https://www.cordaid.org/en/",
         "inbox/Probably Good_JobBoardBeNeLux.html"
       ],
       "relationships": []
@@ -4033,68 +3601,11 @@
       "careers_url": "",
       "funding": "",
       "description": "EU–Africa joint undertaking funding clinical trials and research capacity for infectious diseases affecting sub-Saharan Africa, and strengthening the African clinical research ecosystem. Successor to the EDCTP2 programme.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Careers URL and whether it recruits outside EU-institution channels",
       "sources": [
         "https://www.global-health-edctp3.europa.eu/",
         "inbox/LinkedIn_GlobalHealth.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "egmont-institute",
-      "name": "Egmont Institute",
-      "aka": "Egmont — Royal Institute for International Relations",
-      "city": "Brussels",
-      "lat": 50.8503,
-      "lng": 4.3517,
-      "country": "BE",
-      "cause_areas": [
-        "Careers & talent"
-      ],
-      "tier": 3,
-      "org_type": "think_tank",
-      "founded": 1947,
-      "key_people": "",
-      "website": "https://www.egmontinstitute.be/",
-      "careers_url": "https://www.egmontinstitute.be/about-us/jobs/",
-      "funding": "",
-      "description": "Belgian royal institute for international relations: an independent Brussels think tank on European affairs, security and Africa policy. Its research fellowships appear on the 80,000 Hours job board as policy career development.",
-      "remote_note": "",
-      "confidence": "medium",
-      "verify": "No EA link — included as cause-adjacent policy career capital",
-      "sources": [
-        "https://www.egmontinstitute.be/",
-        "inbox/Job board _ 80,000 Hours_BELGIUM.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "solarpower-europe",
-      "name": "SolarPower Europe",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.8503,
-      "lng": 4.3517,
-      "country": "BE",
-      "cause_areas": [
-        "Climate"
-      ],
-      "tier": 3,
-      "org_type": "advocacy",
-      "founded": 1985,
-      "key_people": "",
-      "website": "https://www.solarpowereurope.org/",
-      "careers_url": "https://www.solarpowereurope.org/about/careers",
-      "funding": "",
-      "description": "Brussels-based European solar industry association doing EU energy and climate policy advocacy. Its traineeships appear on the 80,000 Hours job board as policy career development.",
-      "remote_note": "",
-      "confidence": "medium",
-      "verify": "Industry association rather than a charity — confirm this is a fit newcomers should see",
-      "sources": [
-        "https://www.solarpowereurope.org/",
-        "inbox/Job board _ 80,000 Hours_BELGIUM.html"
       ],
       "relationships": []
     },
@@ -4118,68 +3629,10 @@
       "careers_url": "https://careers.eitfood.eu/",
       "funding": "",
       "description": "EU food-innovation body headquartered in Leuven, funding and supporting projects across the European food system including protein diversification and sustainable agriculture. Hosts the Alt Protein Project network with the Good Food Institute.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Whether the Leuven address is the operating HQ or a registered seat",
       "sources": [
         "https://www.eitfood.eu/",
-        "inbox/Probably Good_JobBoardBeNeLux.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "journalismfund-europe",
-      "name": "Journalismfund Europe",
-      "aka": "",
-      "city": "Brussels",
-      "lat": 50.8503,
-      "lng": 4.3517,
-      "country": "BE",
-      "cause_areas": [
-        "Community building"
-      ],
-      "tier": 3,
-      "org_type": "funder_advisor",
-      "founded": 1998,
-      "key_people": "",
-      "website": "https://www.journalismfund.eu/",
-      "careers_url": "https://www.journalismfund.eu/grants",
-      "funding": "",
-      "description": "Brussels-based fund giving grants to independent cross-border investigative journalism, including a dedicated grant line for farm animal welfare investigations.",
-      "remote_note": "",
-      "confidence": "medium",
-      "verify": "Whether the animal welfare grant line is recurring or was a one-off",
-      "sources": [
-        "https://www.journalismfund.eu/",
-        "inbox/Probably Good_JobBoardBeNeLux.html"
-      ],
-      "relationships": []
-    },
-    {
-      "id": "norrsken-amsterdam",
-      "name": "Norrsken House Amsterdam",
-      "aka": "",
-      "city": "Amsterdam",
-      "lat": 52.3676,
-      "lng": 4.9041,
-      "country": "NL",
-      "cause_areas": [
-        "Community building",
-        "Climate"
-      ],
-      "tier": 3,
-      "org_type": "community_group",
-      "founded": 2026,
-      "key_people": "",
-      "website": "https://www.norrsken.org/",
-      "careers_url": "https://www.norrsken.org/jobs",
-      "funding": "Norrsken Foundation (Sweden); City of Amsterdam contribution",
-      "description": "Amsterdam hub of the Swedish Norrsken Foundation, opening in 2026 in the Van Gendt Hallen and intended to host 1,000+ entrepreneurs and investors working on climate, energy, food, health and other societal challenges. Impact-entrepreneurship rather than EA, but a large co-location point for mission-driven work in the city.",
-      "remote_note": "",
-      "confidence": "low",
-      "verify": "Whether the hub has actually opened, and whether it hires locally — the 2026 opening was still forthcoming at time of writing",
-      "sources": [
-        "https://nltimes.nl/2025/12/15/swedish-norrsken-founded-klarna-co-founder-open-impact-tech-center-amsterdam",
         "inbox/Probably Good_JobBoardBeNeLux.html"
       ],
       "relationships": []
@@ -4204,7 +3657,6 @@
       "careers_url": "https://mosameat.com/careers",
       "funding": "Venture capital — $171M across 12 rounds, most recently a Series C in December 2025",
       "description": "Maastricht cultivated-meat company, spun out of the Maastricht University team that produced the first cultured beef burger in 2013. Around 120 staff and roughly $171M raised; operates bioreactors up to 1,000 litres and is working through EU regulatory approval.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Current headcount and regulatory status; for-profit, so treat hiring as commercial rather than mission-funded",
       "sources": [
@@ -4233,7 +3685,6 @@
       "careers_url": "",
       "funding": "Venture capital (~€6M: World Fund, Vorwerk Ventures, Revent, Nucleus Capital, Possible Ventures) plus a €1M European Regional Development Fund grant",
       "description": "Amsterdam fermentation company producing protein from a feedstock made with CO2, water, nitrogen and renewable energy, bypassing both animals and farmland. Building a pilot protein brewery in Amsterdam. Its internships appear on the Probably Good job board under animal welfare.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "Founding year and current stage; no EA funder — included as a strongly cause-aligned company",
       "sources": [
@@ -4262,7 +3713,6 @@
       "careers_url": "",
       "funding": "Venture capital (~$32.9M: Capnamic, Holcim, Goldbeck, Amazon Climate Pledge Fund) plus European Innovation Council and Dutch ministry grants",
       "description": "Rotterdam carbon-removal company that accelerates natural CO2 mineralisation to make carbon-storing material for the construction industry. Its Rotterdam demonstration plant has run continuously since 2025; it aims for a commercial-scale plant by 2027.",
-      "remote_note": "",
       "confidence": "medium",
       "verify": "No EA funder — included as a strongly cause-aligned company; confirm careers URL",
       "sources": [
@@ -4288,7 +3738,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.coefficientgiving.org/",
@@ -4317,7 +3767,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.givingwhatwecan.org/funds",
@@ -4347,7 +3797,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.longview.org/",
@@ -4376,7 +3826,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://manifund.org/",
@@ -4405,7 +3855,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://survivalandflourishing.fund/",
@@ -4433,7 +3883,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://far.ai/",
@@ -4461,7 +3911,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://metr.org/",
@@ -4489,7 +3939,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://carma.org/",
@@ -4518,7 +3968,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://kairos-project.org/",
@@ -4546,7 +3996,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://forecastingresearch.org/",
@@ -4575,7 +4025,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "company",
       "founded": null,
       "key_people": "",
       "website": "https://futuresearch.ai/",
@@ -4603,7 +4053,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://sage-future.org/",
@@ -4632,7 +4082,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "think_tank",
       "founded": null,
       "key_people": "",
       "website": "https://www.longtermresilience.org/",
@@ -4661,7 +4111,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.forethought.org/",
@@ -4689,7 +4139,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.flf.org/",
@@ -4718,7 +4168,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://foresight.org/",
@@ -4746,7 +4196,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.lasrlabs.org/",
@@ -4775,7 +4225,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.arcadiaimpact.org/",
@@ -4804,7 +4254,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://aisafety.quest/",
@@ -4833,7 +4283,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.aisafety.com/",
@@ -4861,7 +4311,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "think_tank",
       "founded": null,
       "key_people": "",
       "website": "https://www.averi.org/",
@@ -4889,7 +4339,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://beneficialaifoundation.org/",
@@ -4917,7 +4367,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.halcyonfutures.org/",
@@ -4945,7 +4395,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://theaipn.org/",
@@ -4973,7 +4423,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.themidasproject.com/",
@@ -5002,7 +4452,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.trajectorylabs.org/",
@@ -5086,7 +4536,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://humancompatible.ai/",
@@ -5115,7 +4565,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://xrisk.uchicago.edu/",
@@ -5143,7 +4593,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://thebulletin.org/",
@@ -5172,7 +4622,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://centerforhealthsecurity.org/",
@@ -5200,7 +4650,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://blueprintbiosecurity.org/",
@@ -5228,7 +4678,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://securedna.org/",
@@ -5256,7 +4706,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": 2024,
       "key_people": "James Smith (director)",
       "website": "https://www.mbdialogues.org/",
@@ -5284,7 +4734,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.sentinelbio.org/",
@@ -5312,7 +4762,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://animaloutlook.org/",
@@ -5340,7 +4790,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.crustaceancompassion.org/",
@@ -5368,7 +4818,7 @@
         "Animal welfare & food systems"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://centerforreducingsuffering.org/",
@@ -5396,7 +4846,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://rethinkwellbeing.org/",
@@ -5425,7 +4875,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.highimpactmedicine.org/",
@@ -5453,7 +4903,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.highimpactathletes.org/",
@@ -5482,7 +4932,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "think_tank",
       "founded": null,
       "key_people": "",
       "website": "https://ifp.org/",
@@ -5510,7 +4960,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "community",
       "founded": null,
       "key_people": "",
       "website": "https://www.eahongkong.org/",
@@ -5539,7 +4989,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://catalyze-impact.org/",
@@ -5567,7 +5017,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://law-ai.org/",
@@ -5595,7 +5045,7 @@
         "AI safety & governance"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://cesia.org/en/",
@@ -5624,7 +5074,7 @@
         "Effective giving & meta"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "funder_advisor",
       "founded": null,
       "key_people": "",
       "website": "https://www.givinggreen.earth/",
@@ -5652,7 +5102,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://bfi.uchicago.edu/development-innovation-lab/",
@@ -5680,7 +5130,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://helenkellerintl.org/",
@@ -5708,7 +5158,7 @@
         "Biosecurity & pandemic preparedness"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.icanw.org/",
@@ -5736,7 +5186,7 @@
         "Global health & development"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://www.lafiya.org/",
@@ -5765,7 +5215,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://compassionate-future.org/",
@@ -5794,7 +5244,7 @@
         "Community building"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "research",
       "founded": null,
       "key_people": "",
       "website": "https://www.socialmovementlab.org/",
@@ -5823,7 +5273,7 @@
         "Climate"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "ngo",
       "founded": null,
       "key_people": "",
       "website": "https://raceagainstwaste.org/",
@@ -5851,13 +5301,13 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.consultantsforimpact.org/",
       "careers_url": "",
       "funding": "",
-      "description": "Careers organisation helping management consultants transition into high-impact roles.",
+      "description": "Careers organisation helping management consultants transition into high-impact roles. Site appeared unfinished when last checked (Aug 2026).",
       "remote_note": "No BeNeLux office. Included because it exhibited at EA Summit Brussels 2026 (export saved 2026-08-11), so a BeNeLux-based person could plausibly be hired. Check the org's own careers page for current location and visa requirements.",
       "confidence": "low",
       "verify": "Site title reads 'Home-update FIrst Draft', suggesting an unfinished page — confirm the organisation is active before promoting it",
@@ -5880,7 +5330,7 @@
         "Careers & talent"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "talent_program",
       "founded": null,
       "key_people": "",
       "website": "https://www.ml4good.org/",
@@ -5910,7 +5360,7 @@
         "Climate"
       ],
       "tier": 4,
-      "org_type": "",
+      "org_type": "think_tank",
       "founded": null,
       "key_people": "",
       "website": "https://www.future-matters.org/",
@@ -5944,7 +5394,7 @@
       "website": "https://www.syntonyresearch.ai/",
       "careers_url": "",
       "funding": "",
-      "description": "AI evaluation and assurance company: red-teams AI systems, turns findings into governance recommendations, then re-tests. Works with AI developers, deploying companies, governments and research institutions.",
+      "description": "Self-described AI evaluation and assurance company: red-teams AI systems, turns findings into governance recommendations, then re-tests. Works with AI developers, deploying companies, governments and research institutions.",
       "remote_note": "No confirmed BeNeLux office. The 80,000 Hours export lists Brussels among the possible work locations for its CTO role alongside Durham NC, London, Singapore and the SF Bay Area. Kept as remote rather than given a Brussels pin because the office is unverified.",
       "confidence": "low",
       "verify": "Whether Syntony actually has a Brussels presence — if confirmed, this becomes a tier-3 Belgian entry",
